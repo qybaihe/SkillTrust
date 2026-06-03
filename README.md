@@ -1,16 +1,39 @@
 # SkillTrust
 
-[简体中文](README.zh-CN.md)
+[简体中文](README.zh-CN.md) · [Installation](#installation) · [Quick Start](#quick-start) · [Host-Agent Semantic Review](#host-agent-semantic-review)
 
 ![SkillTrust cover](docs/assets/skilltrust-cover.png)
 
-**SkillTrust is an intent-bound permission governance layer for AI Skills.**
+**Intent-bound permission governance for AI Skills.**
 
 It turns an untrusted Skill package into a least-privilege permission manifest, an install-time policy overlay, an audit receipt, a trust report, and a conservative install decision.
 
 Unlike a simple keyword scanner, SkillTrust asks a harder question:
 
 > What is the minimum permission set required for this Skill to do what it claims, and does its observed behavior exceed that intent-bound boundary?
+
+## At A Glance
+
+![SkillTrust architecture flow](docs/assets/skilltrust-flow.png)
+
+SkillTrust is not a normal security scanner. It is an install-time governance pipeline:
+
+- It reads the Skill package as untrusted evidence.
+- It extracts declared intent and scans observed behavior deterministically.
+- It asks the host Agent to read the core documents end-to-end and produce semantic permission judgment.
+- It fuses both layers conservatively, keeping deterministic evidence authoritative.
+- It emits a least-privilege governance bundle that can drive `allow`, `warn`, or `block`.
+
+Primary outputs:
+
+```text
+permission_manifest.json
+skilltrust-policy.json
+trust_report.md / fused_trust_report.md
+audit_receipt.json
+remediation_plan.md
+install_decision.json / fused_install_decision.json
+```
 
 ## Why This Exists
 
@@ -28,8 +51,6 @@ SkillTrust provides the missing install-time trust layer: **intent-bound, least-
 ## Architecture
 
 SkillTrust combines deterministic evidence collection with host-Agent semantic review. It does **not** call OpenAI, Anthropic, or any external model API. It does **not** require an API key.
-
-![SkillTrust flow](docs/assets/skilltrust-flow.png)
 
 1. **Deterministic scanner**
 
@@ -365,12 +386,16 @@ Expected:
 15 passed
 ```
 
-Re-render the hand-drawn architecture diagram:
+Re-render the hand-drawn architecture diagrams:
 
 ```bash
 node ~/.codex/skills/excalidraw/scripts/render.js \
   docs/diagrams/skilltrust-flow.excalidraw \
   docs/assets/skilltrust-flow.png
+
+node ~/.codex/skills/excalidraw/scripts/render.js \
+  docs/diagrams/skilltrust-flow.zh-CN.excalidraw \
+  docs/assets/skilltrust-flow.zh-CN.png
 ```
 
 ## Hackathon Narrative

@@ -1,16 +1,39 @@
 # SkillTrust
 
-[English](README.md)
+[English](README.md) · [安装部署](#安装部署) · [快速开始](#快速开始) · [Host-Agent 语义审查](#host-agent-语义审查)
 
 ![SkillTrust 封面](docs/assets/skilltrust-cover.png)
 
-**SkillTrust 是一个面向 AI Skills 的意图绑定权限治理层。**
+**面向 AI Skills 的意图绑定权限治理层。**
 
 它可以把一个不可信的 Skill 包转换成：最小权限清单、安装前策略覆盖、审计凭证、可信报告和保守的安装决策。
 
 它不是简单的关键词扫描器，而是回答一个更关键的问题：
 
 > 这个 Skill 要完成它声称的任务，最少需要哪些权限？它实际触达的行为是否超出了这个意图边界？
+
+## 一图看懂
+
+![SkillTrust 中文流程图](docs/assets/skilltrust-flow.zh-CN.png)
+
+SkillTrust 不是普通安全扫描器，而是一条安装前权限治理链路：
+
+- 把 Skill 包当作不可信 evidence 来读取。
+- 用确定性扫描提取声明意图、实际行为、行号、hash 和 findings。
+- 让宿主 Agent 先全文阅读核心文档，再给出语义权限判断。
+- 用保守融合层合并两类证据，并保持 deterministic evidence 的权威性。
+- 最终输出可用于 `allow`、`warn` 或 `block` 的最小权限治理包。
+
+主要输出：
+
+```text
+permission_manifest.json
+skilltrust-policy.json
+trust_report.md / fused_trust_report.md
+audit_receipt.json
+remediation_plan.md
+install_decision.json / fused_install_decision.json
+```
 
 ## 为什么需要 SkillTrust
 
@@ -28,8 +51,6 @@ SkillTrust 提供的是缺失的安装前信任层：**意图绑定、最小权�
 ## 架构
 
 SkillTrust 结合了确定性证据采集和宿主 Agent 语义审查。它**不调用 OpenAI、Anthropic 或任何外部模型 API**，也**不需要 API Key**。
-
-![SkillTrust 流程图](docs/assets/skilltrust-flow.png)
 
 1. **Deterministic scanner**
 
@@ -336,12 +357,16 @@ PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider
 15 passed
 ```
 
-重新渲染手绘流程图：
+重新渲染英文/中文手绘流程图：
 
 ```bash
 node ~/.codex/skills/excalidraw/scripts/render.js \
   docs/diagrams/skilltrust-flow.excalidraw \
   docs/assets/skilltrust-flow.png
+
+node ~/.codex/skills/excalidraw/scripts/render.js \
+  docs/diagrams/skilltrust-flow.zh-CN.excalidraw \
+  docs/assets/skilltrust-flow.zh-CN.png
 ```
 
 ## 比赛叙事
