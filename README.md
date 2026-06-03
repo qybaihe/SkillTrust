@@ -65,6 +65,8 @@ The benchmark found no broad malicious pattern in the sampled packages. Its stro
 
 See [Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md).
 
+Full evaluated sample catalog with source links, download links, and GitHub star counts: [Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md). Chinese version: [被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md).
+
 ## Value Proof: Allow Is Not The Finish Line
 
 SkillTrust also generated optimization plans for the same public sample. The goal is not only to say whether a package is installable, but to make it slimmer, more intent-bound, and easier for an Agent to select precisely:

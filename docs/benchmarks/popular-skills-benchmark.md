@@ -23,6 +23,8 @@ Because local GitHub clone access was unreliable during this run, several target
 
 Total sampled packages: 28
 
+Full evaluated package catalog with source links, download links, and GitHub star counts: [Evaluated Skills Catalog](evaluated-skills-catalog.md). Chinese version: [被评测 Skill 清单](evaluated-skills-catalog.zh-CN.md).
+
 Decision summary:
 
 - Allow: 24

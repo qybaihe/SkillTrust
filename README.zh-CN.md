@@ -65,6 +65,8 @@ SkillTrust 已对 28 个来自热门公开 AI Skill、Claude Skill、Cursor rule
 
 查看报告：[Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md)。
 
+完整被评测样本清单、来源链接、下载链接和 GitHub Stars：[被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md)。英文版：[Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md)。
+
 ## Value Proof：Allow 不是终点
 
 SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判断能不能安装，而是把 package 变得更精简、更受意图约束，也更容易被 Agent 精准选择：
