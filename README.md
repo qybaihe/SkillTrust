@@ -44,7 +44,7 @@ SkillTrust helps answer five questions before using or installing a Skill:
 
 It is designed for:
 
-- local Codex Skill audits
+- local AI Skill audits across Codex, Claude Code, Cursor, and other Agent environments
 - Skill registry and marketplace review
 - install-time permission gates
 - enterprise approval workflows
@@ -53,81 +53,65 @@ It is designed for:
 
 ## Install
 
-### One-Prompt Agent Install
+### Universal One-Prompt Agent Install
 
-Paste this prompt into Codex or another local coding Agent:
+Paste this prompt into any local AI Agent, including Codex, Claude Code, Cursor, or another coding Agent:
 
 ```text
-Install SkillTrust as a local Codex Skill from https://github.com/qybaihe/SkillTrust. Clone or update it at ~/.codex/skills/skilltrust, set up the local skilltrust command, verify skilltrust --help works, then run a read-only local Skill portfolio audit with skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all. Do not modify, rename, or remediate any existing local Skill automatically; only generate reports, policy overlays, and approval plans. After the audit, summarize allow/warn/block counts, dangerous or overprivileged findings, and the next safest remediation steps.
+Install SkillTrust from https://github.com/qybaihe/SkillTrust for the current AI Agent environment. First detect whether this environment is Codex, Claude Code, Cursor, or another local Agent. If the host has a user-level Skills, extensions, rules, or reusable-agent-instructions directory, install SkillTrust there; otherwise install it as a general local tool. Verify that SkillTrust is usable, detect the current Agent's local Skills/extensions/rules root if one exists, then run a read-only first audit of that local Agent package ecosystem. If no local Agent root exists, audit the included demo fixtures and explain how I can pass a target Skill directory. Do not modify, rename, or remediate any existing local Skill, rule, extension, or Agent instruction automatically; only generate reports, policy overlays, and approval plans. After the audit, summarize allow/warn/block counts, dangerous or overprivileged findings, and the next safest remediation steps.
 ```
 
-This is the recommended installation path because SkillTrust is meant to be used by the host Agent. The Agent installs it, verifies it, audits the local Skill ecosystem, and keeps all real Skills unchanged unless you explicitly approve follow-up edits.
+This is the recommended installation path because SkillTrust is meant to be used by whichever host Agent is running it. The Agent installs it, verifies it, detects the local Agent package root when available, audits the local Skill or instruction ecosystem, and keeps all real packages unchanged unless you explicitly approve follow-up edits.
 
 ### After Installation
 
 Ask your Agent:
 
 ```text
-Use SkillTrust to run a read-only audit of my local Codex Skills and tell me which ones are overprivileged, dangerous, or worth optimizing.
+Use SkillTrust to run a read-only audit of my local AI Agent Skills, rules, extensions, or reusable instructions, and tell me which ones are overprivileged, dangerous, ambiguous, or worth optimizing.
 ```
 
 ## Use
 
-### Audit All Local Skills
+SkillTrust is meant to be used through natural-language requests to your Agent. Copy one of these prompts.
 
-```bash
-skilltrust audit-local --skills-root ~/.codex/skills --out reports/local-all
+### Audit All Local Agent Packages
+
+```text
+Use SkillTrust to audit all local AI Agent Skills, rules, extensions, and reusable instructions in this environment. Keep the audit read-only. Tell me which packages are allow, warn, or block, and highlight the most important permission overreach, dangerous data-flow, ambiguity, and optimization findings.
 ```
-
-Use this to review your whole local Skill ecosystem. It produces a portfolio dashboard with `allow`, `warn`, and `block` decisions.
 
 ### Audit One Skill
 
-```bash
-skilltrust analyze ./path/to/skill --out reports/skill-audit
+```text
+Use SkillTrust to audit this Skill or Agent package: <paste the path, repository, or folder here>. Explain what it claims to do, what permissions it really needs, what behavior it exposes, whether anything exceeds its intent, and whether I should allow, warn, or block it.
 ```
 
-Use this before trusting, installing, publishing, or submitting a Skill.
+### Check Before Installing
 
-### Install-Time Check
-
-```bash
-skilltrust install-check ./path/to/skill --out reports/install-check
+```text
+Use SkillTrust as an install-time gate for this Skill package: <paste the path, repository, or folder here>. Give me a clear allow, warn, or block decision, and explain the evidence behind it.
 ```
 
-Use this when you want a direct `allow`, `warn`, or `block` install decision.
+### Generate A Reviewable Remediation Plan
 
-### Generate A Reviewable Remediation Bundle
-
-```bash
-skilltrust remediate ./path/to/skill --out reports/remediated
+```text
+Use SkillTrust to create a reviewable remediation plan for this Skill package: <paste the path, repository, or folder here>. Do not modify the original package. Generate the least-privilege policy overlay, narrowed permission recommendations, and the safest next edits for me to approve.
 ```
-
-This does not silently edit the target Skill. It generates policy overlays, narrowed permission manifests, remediation plans, and reviewable drafts.
 
 ### Add Host-Agent Semantic Review
 
-```bash
-skilltrust analyze ./path/to/skill --agent-review-request --out reports/agent-review
-```
-
-Then the host Agent reads the generated semantic review request, reads the listed core documents fully, writes `semantic_review.json`, and fuses it with deterministic evidence:
-
-```bash
-skilltrust fuse reports/agent-review/analysis.json reports/agent-review/semantic_review.json --out reports/agent-review-fused
+```text
+Use SkillTrust's host-Agent semantic review for this Skill package: <paste the path, repository, or folder here>. First read the core documents fully, then compare declared intent against observed behavior, preserve deterministic evidence, and produce the fused trust decision.
 ```
 
 SkillTrust does **not** call OpenAI, Anthropic, or any external model API. No API key is required. The semantic reviewer is the Agent already running SkillTrust.
 
 ### Optimize Skill Quality
 
-```bash
-skilltrust authoring-audit ./path/to/skill --out reports/authoring
-skilltrust token-optimize ./path/to/skill --out reports/token
-skilltrust taxonomy-audit --skills-root ~/.codex/skills --out reports/taxonomy
+```text
+Use SkillTrust to review this Skill ecosystem for authoring quality, token efficiency, and taxonomy clarity. Keep all changes as recommendations or approval plans unless I explicitly approve edits.
 ```
-
-Use these when you want to improve Skill structure, reduce activation-token waste, or fix ambiguous Skill naming and routing.
 
 ## Outputs
 

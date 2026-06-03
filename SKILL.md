@@ -1,6 +1,6 @@
 ---
 name: skilltrust
-description: Use when auditing, installing, reviewing, or governing AI Skill packages for intent-bound least-privilege permissions, overprivileged behavior, dangerous data flows, host-Agent semantic review, local Codex Skill portfolio safety, policy overlays, remediation plans, token efficiency, or taxonomy conflicts.
+description: Use when auditing, installing, reviewing, or governing AI Skill packages for intent-bound least-privilege permissions, overprivileged behavior, dangerous data flows, host-Agent semantic review, local AI Agent Skill/rule/extension portfolio safety, policy overlays, remediation plans, token efficiency, or taxonomy conflicts.
 ---
 
 # SkillTrust
@@ -28,25 +28,25 @@ Use this Skill when the user asks to:
 - detect overprivileged or malicious-like Skill behavior
 - produce a reproducible trust report or audit receipt
 - prepare a Skill for registry, marketplace, hackathon, or enterprise review
-- check whether local Codex Skills are overprivileged, dangerous, ambiguous, or worth optimizing
+- check whether local AI Agent Skills, rules, extensions, or reusable instructions are overprivileged, dangerous, ambiguous, or worth optimizing
 
 ## First-Run Behavior
 
-When this Skill is loaded without a specific target path, recommend a read-only local Skill portfolio audit first:
+When this Skill is loaded without a specific target path, recommend a read-only local AI Agent package portfolio audit first. Use the current host Agent's Skills, rules, extensions, or reusable-instructions root if it can be detected:
 
 ```bash
-skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all
+skilltrust audit-local --skills-root <agent-skills-or-instructions-root> --out <skilltrust-install-dir>/reports/local-all
 ```
 
 Use this first-run audit to answer:
 
-- which local Skills are `allow`, `warn`, or `block`
-- whether any Skill requests permissions beyond its declared task
-- whether any Skill has dangerous source-to-network data flow
-- whether any Skill should get a policy overlay before use
-- whether any Skill should be optimized for harness structure, token efficiency, or taxonomy clarity
+- which local Skills, rules, extensions, or reusable instructions are `allow`, `warn`, or `block`
+- whether any package requests permissions beyond its declared task
+- whether any package has dangerous source-to-network data flow
+- whether any package should get a policy overlay before use
+- whether any package should be optimized for harness structure, token efficiency, or taxonomy clarity
 
-Do not automatically modify, rename, or remediate real local Skills. For local Skills, generate reports, overlays, optimized drafts, and approval plans only. Apply edits only after the user explicitly approves a concrete plan.
+Do not automatically modify, rename, or remediate real local Skills, rules, extensions, or Agent instructions. For local packages, generate reports, overlays, optimized drafts, and approval plans only. Apply edits only after the user explicitly approves a concrete plan.
 
 After a local portfolio audit, summarize the result in plain language: counts, top risks, blocked Skills, recommended remediation order, and where the generated report lives.
 
@@ -130,7 +130,7 @@ SkillTrust can generate:
 python -m skilltrust analyze ./path/to/skill
 python -m skilltrust analyze ./path/to/skill --format json
 python -m skilltrust analyze ./path/to/skill --out reports/example
-python -m skilltrust audit-local --skills-root ~/.codex/skills --out reports/local-all
+python -m skilltrust audit-local --skills-root <agent-skills-or-instructions-root> --out reports/local-all
 python -m skilltrust remediate ./path/to/skill --out reports/remediated-skill
 python -m skilltrust install-check ./path/to/skill --out reports/install-check
 python -m skilltrust analyze ./path/to/skill --agent-review-request --out reports/agent-review
@@ -139,7 +139,7 @@ python -m skilltrust fuse reports/agent-review/analysis.json reports/agent-revie
 python -m skilltrust draft-semantic-review reports/agent-review/semantic_review_request.json --out reports/agent-review/semantic_review.json
 python -m skilltrust authoring-audit ./path/to/skill --out reports/authoring-skill
 python -m skilltrust token-optimize ./path/to/skill --out reports/token-skill
-python -m skilltrust taxonomy-audit --skills-root ~/.codex/skills --out reports/taxonomy-local
+python -m skilltrust taxonomy-audit --skills-root <agent-skills-or-instructions-root> --out reports/taxonomy-local
 ```
 
 After editable installation:
@@ -153,18 +153,18 @@ skilltrust analyze ./path/to/skill --out reports/example
 Use:
 
 ```bash
-skilltrust audit-local --skills-root ~/.codex/skills --out reports/local-all
+skilltrust audit-local --skills-root <agent-skills-or-instructions-root> --out reports/local-all
 ```
 
-This scans all local Skills, produces per-Skill governance bundles, and creates a portfolio dashboard showing:
+This scans local Agent Skills, rules, extensions, or reusable instruction packages, produces per-package governance bundles, and creates a portfolio dashboard showing:
 
-- which Skills are allowed
-- which Skills need a policy overlay
-- which Skills are blocked until remediation
+- which packages are allowed
+- which packages need a policy overlay
+- which packages are blocked until remediation
 - what optimization controls were generated
 - where each Skill's report and audit receipt live
 
-By default, this workflow is read-only for real local Skill directories. It writes policy overlays and remediation bundles into the selected output directory.
+By default, this workflow is read-only for real local Agent package directories. It writes policy overlays and remediation bundles into the selected output directory.
 
 ## Host-Agent Semantic Review
 
@@ -255,10 +255,10 @@ The command generates `token_efficiency_report.md` and `token_optimization_plan.
 Use:
 
 ```bash
-skilltrust taxonomy-audit --skills-root ~/.codex/skills --out reports/taxonomy-local
+skilltrust taxonomy-audit --skills-root <agent-skills-or-instructions-root> --out reports/taxonomy-local
 ```
 
-This checks whether the local Skill ecosystem is easy for the model to route:
+This checks whether the local Skill, rule, extension, or reusable-instruction ecosystem is easy for the model to route:
 
 - duplicate or near-duplicate Skill names
 - generic names that should become domain-specific

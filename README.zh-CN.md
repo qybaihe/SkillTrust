@@ -44,7 +44,7 @@ SkillTrust 用来在使用或安装 Skill 前回答五个问题：
 
 它适合：
 
-- 本地 Codex Skills 安全审计
+- Codex、Claude Code、Cursor 等本地 AI Agent 的 Skills / rules / extensions 安全审计
 - Skill registry / marketplace 审查
 - 安装前权限门禁
 - 企业内部审批流程
@@ -53,81 +53,65 @@ SkillTrust 用来在使用或安装 Skill 前回答五个问题：
 
 ## 安装
 
-### 一句话交给 AI Agent 安装
+### 通用一句话交给 AI Agent 安装
 
-把下面这段提示词发给 Codex 或其他本地 coding Agent：
+把下面这段提示词发给任意本地 AI Agent，例如 Codex、Claude Code、Cursor 或其他 coding Agent：
 
 ```text
-请把 SkillTrust 从 https://github.com/qybaihe/SkillTrust 安装为本地 Codex Skill。将仓库 clone 或更新到 ~/.codex/skills/skilltrust，配置好本地 skilltrust 命令，并验证 skilltrust --help 可以运行。安装完成后，请立即运行一次只读的本地 Skill 组合审计：skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all。不要自动修改、重命名或修复任何现有本地 Skill，只生成报告、policy overlay 和需要用户审批的计划。最后请总结 allow/warn/block 数量、危险或越权 findings，以及下一步最安全的 remediation 建议。
+请把 SkillTrust 从 https://github.com/qybaihe/SkillTrust 安装到当前 AI Agent 环境中。先识别当前环境是 Codex、Claude Code、Cursor 还是其他本地 Agent。如果宿主环境有用户级 Skills、extensions、rules 或 reusable-agent-instructions 目录，就把 SkillTrust 安装到那里；如果没有专用目录，就把它安装成通用本地工具。请验证 SkillTrust 已可使用，然后识别当前 Agent 的本地 Skills/extensions/rules 根目录；如果存在，请对这个本地 Agent package 生态做一次只读首次审计。如果不存在本地 Agent 根目录，请审计仓库内置 demo fixtures，并说明我如何传入目标 Skill 目录。不要自动修改、重命名或修复任何现有本地 Skill、rule、extension 或 Agent instruction，只生成报告、policy overlay 和需要用户审批的计划。最后请总结 allow/warn/block 数量、危险或越权 findings，以及下一步最安全的 remediation 建议。
 ```
 
-这是推荐安装方式，因为 SkillTrust 本来就是给宿主 Agent 使用的。Agent 会完成安装、验证、本地 Skill 生态审计，并且在你明确批准之前不会改动任何真实 Skill。
+这是推荐安装方式，因为 SkillTrust 本来就是给宿主 Agent 使用的。Agent 会完成安装、验证、识别当前环境的本地包目录、审计 Skill 或 instructions 生态，并且在你明确批准之前不会改动任何真实包。
 
 ### 安装后使用
 
 对 Agent 说：
 
 ```text
-请使用 SkillTrust 对我的本地 Codex Skills 做一次只读审计，告诉我哪些 Skill 可能越权、危险，或者值得优化。
+请使用 SkillTrust 对我的本地 AI Agent Skills、rules、extensions 或 reusable instructions 做一次只读审计，告诉我哪些可能越权、危险、歧义，或者值得优化。
 ```
 
 ## 使用
 
-### 审计所有本地 Skills
+SkillTrust 的使用方式就是直接对 Agent 说自然语言。你可以复制下面这些提示词。
 
-```bash
-skilltrust audit-local --skills-root ~/.codex/skills --out reports/local-all
+### 审计所有本地 Agent packages
+
+```text
+请使用 SkillTrust 审计当前环境里的所有本地 AI Agent Skills、rules、extensions 和 reusable instructions。保持只读，不要修改任何内容。请告诉我哪些 package 是 allow、warn 或 block，并重点列出权限越界、危险数据流、命名歧义和可优化项。
 ```
-
-用于检查整个本地 Skill 生态，生成 `allow`、`warn`、`block` 总览。
 
 ### 审计单个 Skill
 
-```bash
-skilltrust analyze ./path/to/skill --out reports/skill-audit
+```text
+请使用 SkillTrust 审计这个 Skill 或 Agent package：<把路径、仓库地址或文件夹放在这里>。请说明它声称要做什么、真正需要什么权限、实际暴露了什么行为、有没有超出意图边界，以及我应该 allow、warn 还是 block。
 ```
-
-用于在信任、安装、发布或提交某个 Skill 前做权限治理审查。
 
 ### 安装前门禁
 
-```bash
-skilltrust install-check ./path/to/skill --out reports/install-check
+```text
+请用 SkillTrust 对这个 Skill package 做安装前门禁检查：<把路径、仓库地址或文件夹放在这里>。请给出明确的 allow、warn 或 block 决策，并解释关键证据。
 ```
 
-用于获得直接的 `allow`、`warn` 或 `block` 安装决策。
+### 生成可审查的修复计划
 
-### 生成可审查的修复包
-
-```bash
-skilltrust remediate ./path/to/skill --out reports/remediated
+```text
+请使用 SkillTrust 为这个 Skill package 生成可审查的修复计划：<把路径、仓库地址或文件夹放在这里>。不要修改原始 package，只生成最小权限 policy overlay、权限收敛建议和需要我审批的下一步修改。
 ```
-
-这个命令不会静默修改目标 Skill，而是生成 policy overlay、收敛后的权限清单、修复计划和可审查草稿。
 
 ### 加入宿主 Agent 语义审查
 
-```bash
-skilltrust analyze ./path/to/skill --agent-review-request --out reports/agent-review
-```
-
-然后宿主 Agent 会读取生成的语义审查请求，完整阅读列出的核心文档，写出 `semantic_review.json`，再和确定性证据融合：
-
-```bash
-skilltrust fuse reports/agent-review/analysis.json reports/agent-review/semantic_review.json --out reports/agent-review-fused
+```text
+请使用 SkillTrust 的宿主 Agent 语义审查来审计这个 Skill package：<把路径、仓库地址或文件夹放在这里>。请先完整阅读核心文档，再比较声明意图和实际行为，保留确定性证据，并输出融合后的信任决策。
 ```
 
 SkillTrust **不调用 OpenAI、Anthropic 或任何外部模型 API**，也**不需要 API Key**。语义审查者就是当前运行 SkillTrust 的宿主 Agent。
 
 ### 优化 Skill 质量
 
-```bash
-skilltrust authoring-audit ./path/to/skill --out reports/authoring
-skilltrust token-optimize ./path/to/skill --out reports/token
-skilltrust taxonomy-audit --skills-root ~/.codex/skills --out reports/taxonomy
+```text
+请使用 SkillTrust 审查这个 Skill 生态的编写质量、token 效率和 taxonomy 清晰度。除非我明确批准修改，否则所有结果只生成建议或审批计划。
 ```
-
-用于优化 Skill 结构、减少 activation token 浪费，或者修复 Skill 命名和触发描述的歧义。
 
 ## 输出
 
