@@ -12,6 +12,7 @@ build/
 
 # Generated local audit/demo artifacts. These can contain local paths or private evidence.
 reports/
+benchmark-targets/
 analysis.json
 trust_report.md
 permission_manifest.json

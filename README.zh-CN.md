@@ -51,6 +51,20 @@ SkillTrust 用来在使用或安装 Skill 前回答五个问题：
 - 比赛与 demo 展示
 - Skill 编写质量、token 效率和 taxonomy 优化
 
+## Benchmark Snapshot
+
+SkillTrust 已对 28 个来自热门公开 AI Skill、Claude Skill、Cursor rules 和 Agent instruction 生态的代表性 package 做过初步静态 benchmark。
+
+初步结果：
+
+- 24 allow
+- 4 warn
+- 0 block
+
+这次 benchmark 没有把重点放在“证明别人危险”，而是证明：即使是高质量 package，也常常可以继续优化 intent-bound governance，例如 connector scope、用户确认门禁、语义误报处理、references 拆分、token 效率和 taxonomy 清晰度。
+
+查看报告：[Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md)。
+
 ## 安装
 
 ### 通用一句话交给 AI Agent 安装

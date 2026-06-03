@@ -51,6 +51,20 @@ It is designed for:
 - hackathon and demo judging
 - Skill authoring, token efficiency, and taxonomy optimization
 
+## Benchmark Snapshot
+
+SkillTrust was run against 28 representative packages from popular public AI Skill, Claude Skill, Cursor rule, and Agent instruction ecosystems.
+
+Preliminary static benchmark result:
+
+- 24 allow
+- 4 warn
+- 0 block
+
+The benchmark found no broad malicious pattern in the sampled packages. Its stronger finding is that even high-quality packages benefit from intent-bound governance: connector scopes, user-confirmation gates, semantic false-positive handling, reference splitting, token efficiency, and taxonomy clarity.
+
+See [Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md).
+
 ## Install
 
 ### Universal One-Prompt Agent Install
