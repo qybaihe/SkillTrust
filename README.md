@@ -74,6 +74,7 @@ SkillTrust also generated optimization plans for the same public sample. The goa
 - Estimated tokens saved: 6,832, about 22.3%.
 - 26 scriptification candidates and 17 reference extraction candidates were found.
 - 9 taxonomy findings and 7 approval-plan items were generated.
+- Selection precision ranking identifies which optimized packages become easier for Agents to choose correctly.
 
 ![SkillTrust governance coverage](docs/assets/value-proof-governance.svg)
 
@@ -81,7 +82,9 @@ SkillTrust also generated optimization plans for the same public sample. The goa
 
 ![SkillTrust optimization surface](docs/assets/value-proof-optimization-surface.svg)
 
-See [SkillTrust Value Proof](docs/benchmarks/value-proof.md).
+![SkillTrust selection precision](docs/assets/value-proof-selection-precision.svg)
+
+See [SkillTrust Value Proof](docs/benchmarks/value-proof.md). Chinese version: [SkillTrust 价值证明](docs/benchmarks/value-proof.zh-CN.md).
 
 ## Install
 

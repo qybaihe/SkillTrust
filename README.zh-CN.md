@@ -74,6 +74,7 @@ SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判
 - 预计节省 6,832 tokens，约 22.3%。
 - 发现 26 个 scriptification candidates 和 17 个 reference extraction candidates。
 - 生成 9 个 taxonomy findings 和 7 个 approval-plan items。
+- 增加 selection precision ranking，用来说明哪些优化后的 Skill 更容易被 Agent 精准选中。
 
 ![SkillTrust governance coverage](docs/assets/value-proof-governance.svg)
 
@@ -81,7 +82,9 @@ SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判
 
 ![SkillTrust optimization surface](docs/assets/value-proof-optimization-surface.svg)
 
-查看报告：[SkillTrust Value Proof](docs/benchmarks/value-proof.md)。
+![SkillTrust selection precision](docs/assets/value-proof-selection-precision.svg)
+
+查看中文报告：[SkillTrust 价值证明](docs/benchmarks/value-proof.zh-CN.md)。英文版：[SkillTrust Value Proof](docs/benchmarks/value-proof.md)。
 
 ## 安装
 

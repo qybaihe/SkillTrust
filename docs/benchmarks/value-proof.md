@@ -4,11 +4,13 @@ Date: 2026-06-03
 
 This page turns the public benchmark into a value proof: SkillTrust does not only decide `allow`, `warn`, or `block`. It also generates an optimization plan that can make AI Skill packages more compact, more intent-bound, and easier for Agents to select precisely.
 
+Chinese version: [SkillTrust 价值证明](value-proof.zh-CN.md).
+
 The numbers below come from the preliminary static benchmark of 28 representative public AI Skill, Claude Skill, Cursor rule, and Agent instruction packages. Several targets were audited in `network-limited` mode, so the results are best read as a representative sample rather than a full supply-chain audit.
 
 ## Evaluation Dimensions
 
-SkillTrust evaluates value across six dimensions:
+SkillTrust evaluates value across seven dimensions:
 
 | Dimension | What It Measures | Why It Matters |
 | --- | --- | --- |
@@ -18,6 +20,7 @@ SkillTrust evaluates value across six dimensions:
 | Policy precision | Connector scopes, workspace binding, user-confirmation gates, destructive-action gates | Converts broad capability into intent-bound permission governance. |
 | Semantic precision | Whether AI full-document reading can distinguish true risk from examples or reference code | Reduces noisy scanner results while preserving evidence. |
 | Taxonomy accuracy | Naming and description overlap across related Skills | Helps the Agent select the right package. |
+| Selection precision / rankability | Positive triggers, negative triggers, scope-bound activation signals, and specialization boundaries | Helps the right optimized Skill rank above generic or overlapping packages. |
 
 ## Governance Coverage
 
@@ -63,6 +66,22 @@ The benchmark found multiple improvement surfaces:
 
 This demonstrates that SkillTrust is a governance layer, not just a scanner. It can validate safe packages and still produce concrete plans to make them safer and leaner.
 
+## Selection Precision Ranking
+
+![SkillTrust selection precision](../assets/value-proof-selection-precision.svg)
+
+SkillTrust also ranks which packages are likely to gain the most selection precision after optimization. This is not a claim of measured production accuracy. It is a reviewable rankability signal based on taxonomy findings, trigger overlap, monolithic always-on context, missing negative triggers, and missing scope boundaries.
+
+| Rank | Package / Portfolio | Baseline Selection Problem | SkillTrust Optimization Plan | Projected Selection Effect |
+| ---: | --- | --- | --- | --- |
+| 1 | `agent-verifier` | Clean permission profile, but `verify-*` Skills overlap heavily; taxonomy score was `0` in the sampled portfolio | Keep `verification` as orchestrator; sharpen `verify-security`, `verify-quality`, `verify-patterns`, and `verify-language` descriptions with positive and negative triggers | Target overlap findings drop from `6` to `0`; projected taxonomy score target is `80+` after re-audit |
+| 2 | `cursor-rules-awesome` | A 4,861-line monolithic rules file makes many unrelated domains compete in the same activation context | Replace the blanket rules file with a short router plus domain references for security, backend, frontend, SRE, compliance, mobile, data, and API | Task-specific rules can rank above generic all-purpose rules; projected taxonomy score target is `100` |
+| 3 | `project-planner` | Planning, GitHub issue creation, GraphQL sub-issues, branch creation, and push behavior can blur into general GitHub automation | Add repo-root binding and explicit confirmation gates for GitHub mutations | The planner remains a planning Skill instead of becoming a broad repository automation Skill |
+| 4 | `skill-creator` | Broad authoring and evaluation guidance creates a token-heavy activation body | Move deep evaluation guidance into references, schemas, and command wrappers | The Skill becomes easier to trigger only when creating, updating, or validating Skills |
+| 5 | `content-research-writer` | Trusted but monolithic research workflow can mix research, writing, and connector behavior | Split rubrics/workflows into references and clarify connector scope | The host Agent can distinguish research-writing intent from drive/document automation intent |
+
+The ranking is useful for demos because it shows a second kind of product value: SkillTrust can recommend where optimization will most improve Agent behavior, not just where security risk exists.
+
 ## Representative Before / After Cases
 
 | Package | Baseline | SkillTrust Optimization Plan | Value Signal |
@@ -82,6 +101,7 @@ This demonstrates that SkillTrust is a governance layer, not just a scanner. It 
 | Broad tools are accepted as implicit authority | High-impact actions get workspace binding, connector scope, and user confirmation gates |
 | Scanner findings can be noisy | Host-Agent full-document review can mark likely false positives while preserving evidence |
 | Similar Skills can overlap in triggers | Taxonomy plans propose clearer names and descriptions pending user approval |
+| Multiple Skills compete for the same user request | Selection precision ranking identifies which optimized Skills need sharper triggers, anti-triggers, and scope boundaries |
 
 ## Public Caveats
 
@@ -89,6 +109,7 @@ This demonstrates that SkillTrust is a governance layer, not just a scanner. It 
 - Some repositories were audited from network-limited raw/page/package snapshots because full clone access was unreliable.
 - SkillTrust did not modify third-party projects.
 - Estimated token savings are optimization-plan estimates, not measured production billing savings.
+- Selection precision ranking is a projected rankability signal, not an end-to-end production accuracy benchmark.
 - `warn` does not mean malicious. It means review, scoping, semantic clarification, or policy overlay is needed before use.
 
 ## Summary

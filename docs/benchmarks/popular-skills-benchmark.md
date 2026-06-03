@@ -71,7 +71,7 @@ Most sampled packages were not malicious and did not produce install-time blocke
 
 This supports SkillTrust's positioning as a trust and permission governance layer, not merely a malware scanner.
 
-For before/after optimization metrics and charts, see [SkillTrust Value Proof](value-proof.md).
+For before/after optimization metrics, selection-precision ranking, and charts, see [SkillTrust Value Proof](value-proof.md). Chinese version: [SkillTrust 价值证明](value-proof.zh-CN.md).
 
 ### 2. Deterministic Evidence Alone Is Not Enough
 
