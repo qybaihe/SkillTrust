@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Generated local audit/demo artifacts. These can contain local paths or private evidence.
+reports/
+analysis.json
+trust_report.md
+permission_manifest.json
+skilltrust-policy.json
+audit_receipt.json
+remediation_plan.md
+
+# Temporary diagram/render outputs
+tmp/

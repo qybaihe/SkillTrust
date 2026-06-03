@@ -1,0 +1,377 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "elements": [
+    {
+      "type": "text",
+      "id": "title",
+      "x": 70,
+      "y": 28,
+      "width": 860,
+      "height": 42,
+      "text": "SkillTrust: Intent-Bound Permission Governance for AI Skills",
+      "fontSize": 30,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "x": 72,
+      "y": 72,
+      "width": 760,
+      "height": 22,
+      "text": "Deterministic evidence + host-Agent semantic review + conservative fusion",
+      "fontSize": 17,
+      "fontFamily": 1,
+      "strokeColor": "#495057"
+    },
+    {
+      "type": "rectangle",
+      "id": "skill",
+      "x": 70,
+      "y": 135,
+      "width": 220,
+      "height": 92,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#fff4e6",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "skill_text",
+      "x": 91,
+      "y": 154,
+      "width": 178,
+      "height": 48,
+      "text": "Untrusted Skill\nSKILL.md\nREADME + code",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "scanner",
+      "x": 370,
+      "y": 125,
+      "width": 250,
+      "height": 112,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "scanner_text",
+      "x": 397,
+      "y": 146,
+      "width": 198,
+      "height": 58,
+      "text": "Deterministic\nScanner\nEvidence + hashes",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "request",
+      "x": 700,
+      "y": 125,
+      "width": 270,
+      "height": 112,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "request_text",
+      "x": 731,
+      "y": 145,
+      "width": 209,
+      "height": 58,
+      "text": "Review Request\nCore docs\nFindings bundle",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "agent",
+      "x": 700,
+      "y": 315,
+      "width": 270,
+      "height": 122,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "agent_text",
+      "x": 726,
+      "y": 336,
+      "width": 218,
+      "height": 70,
+      "text": "Host-Agent\nSemantic Review\nRead docs first",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "semantic",
+      "x": 370,
+      "y": 315,
+      "width": 250,
+      "height": 122,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#f3d9fa",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "semantic_text",
+      "x": 396,
+      "y": 337,
+      "width": 199,
+      "height": 70,
+      "text": "semantic_review.json\nTask boundary\nFit labels + policy",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "fusion",
+      "x": 70,
+      "y": 315,
+      "width": 220,
+      "height": 122,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffec99",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "fusion_text",
+      "x": 96,
+      "y": 337,
+      "width": 168,
+      "height": 70,
+      "text": "Fusion Layer\nPreserve evidence\nConservative action",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "outputs",
+      "x": 70,
+      "y": 535,
+      "width": 400,
+      "height": 130,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "outputs_text",
+      "x": 97,
+      "y": 558,
+      "width": 344,
+      "height": 84,
+      "text": "Governance Artifacts\npermission_manifest.json\nskilltrust-policy.json\nfused report + receipt\nremediation plan",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "diamond",
+      "id": "gate",
+      "x": 590,
+      "y": 515,
+      "width": 250,
+      "height": 160,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffc9c9",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "gate_text",
+      "x": 642,
+      "y": 568,
+      "width": 144,
+      "height": 56,
+      "text": "Install Gate\nallow / warn / block",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "rectangle",
+      "id": "guardrail",
+      "x": 900,
+      "y": 535,
+      "width": 270,
+      "height": 130,
+      "strokeColor": "#862e9c",
+      "backgroundColor": "#f8f0fc",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "text",
+      "id": "guardrail_text",
+      "x": 928,
+      "y": 557,
+      "width": 214,
+      "height": 84,
+      "text": "Safety Guardrails\nNo API key\nNo model API\nCritical data-flow\nstays blocked",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center"
+    },
+    {
+      "type": "arrow",
+      "id": "a1",
+      "from": "skill",
+      "to": "scanner",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a2",
+      "from": "scanner",
+      "to": "request",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a3",
+      "from": "request",
+      "to": "agent",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a4",
+      "from": "agent",
+      "to": "semantic",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a5",
+      "from": "semantic",
+      "to": "fusion",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a6",
+      "from": "scanner",
+      "to": "fusion",
+      "absolutePoints": true,
+      "points": [
+        [
+          495,
+          238
+        ],
+        [
+          495,
+          274
+        ],
+        [
+          180,
+          274
+        ],
+        [
+          180,
+          315
+        ]
+      ],
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "strokeStyle": "dashed"
+    },
+    {
+      "type": "text",
+      "id": "evidence_label",
+      "x": 250,
+      "y": 250,
+      "width": 192,
+      "height": 18,
+      "text": "deterministic evidence remains authoritative",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "strokeColor": "#1971c2"
+    },
+    {
+      "type": "arrow",
+      "id": "a7",
+      "from": "fusion",
+      "to": "outputs",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a8",
+      "from": "outputs",
+      "to": "gate",
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 2,
+      "roughness": 1
+    },
+    {
+      "type": "arrow",
+      "id": "a9",
+      "from": "gate",
+      "to": "guardrail",
+      "strokeColor": "#862e9c",
+      "strokeWidth": 2,
+      "roughness": 1
+    }
+  ]
+}

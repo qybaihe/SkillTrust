@@ -1,0 +1,1 @@
+This canary file represents unrelated personal content for static replay checks.
