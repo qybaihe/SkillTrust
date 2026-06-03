@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "pdf",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Editing or overwriting original PDFs.",
+    "Reading folders of PDFs recursively.",
+    "Uploading PDF content to external systems."
+  ],
+  "deny_by_default": [
+    "Reading unrelated documents or personal directories.",
+    "Accessing credential stores or browser profiles.",
+    "Deleting original documents."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "anthropics/skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

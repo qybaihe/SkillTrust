@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "playwright-pro",
+  "source_package": "playwright-pro",
+  "source_repository": "alirezarezvani/claude-skills",
+  "source_stars_queried_2026_06_03": "17,004",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Generate, run, and debug Playwright tests inside a confirmed project and target URL scope.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read test files and app code in the chosen repo.",
+      "Run local Playwright commands and collect screenshots/traces.",
+      "Write tests and reports in the workspace."
+    ],
+    "confirmation_required": [
+      "Using BrowserStack, TestRail, or external test services.",
+      "Navigating to credentialed or unrelated websites.",
+      "Changing production data."
+    ],
+    "denied_by_default": [
+      "Reading browser profiles, cookies, or unrelated credentials.",
+      "Running destructive browser flows without approval.",
+      "Leaking screenshots or traces externally."
+    ]
+  },
+  "token_optimization": "Move command catalogs and integration setup into references/scripts.",
+  "selection_precision": "Rank for Playwright-specific test tasks, not all browser automation.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "playwright-pro",
+  "optimized_directory": "playwright-pro"
+}

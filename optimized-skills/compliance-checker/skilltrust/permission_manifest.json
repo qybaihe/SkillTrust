@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "compliance-checker",
+  "source_package": "compliance-checker",
+  "source_repository": "OneWave-AI/claude-skills",
+  "source_stars_queried_2026_06_03": "169",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Check compliance evidence inside a named scope and write reviewable reports only.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-selected evidence, policies, docs, and code.",
+      "Run local discovery commands limited to the target scope.",
+      "Write compliance reports and evidence maps."
+    ],
+    "confirmation_required": [
+      "Writing or changing compliance controls.",
+      "Accessing external systems or customer data.",
+      "Using Bash beyond discovery commands."
+    ],
+    "denied_by_default": [
+      "Reading unrelated employee/customer records.",
+      "Making legal conclusions without caveats.",
+      "Uploading evidence without approval."
+    ]
+  },
+  "token_optimization": "Move compliance matrices and checklists into references/schemas.",
+  "selection_precision": "Rank for compliance assessment, not incident response or general security scanning.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "compliance-checker",
+  "optimized_directory": "compliance-checker"
+}

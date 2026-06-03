@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "cursor-rules-security-compliance",
+  "source_package": "cursor-rules-awesome / security-compliance-slice",
+  "source_repository": "tonynguyennvt/cursor-rules-awesome",
+  "source_stars_queried_2026_06_03": "4",
+  "original_gate": "warn",
+  "optimized_posture": "warn-until-semantic-review-and-policy-approval",
+  "declared_intent": "Use security/compliance rules as guidance while preventing credential-store overreach.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read current project files relevant to the security/compliance task.",
+      "Load selected security or compliance guidance references.",
+      "Write review notes and checklists."
+    ],
+    "confirmation_required": [
+      "Scanning secrets or credential stores.",
+      "Running production security tools.",
+      "Changing security policy or configs."
+    ],
+    "denied_by_default": [
+      "Reading keychains, cookies, .env secrets, SSH keys, or cloud credentials unless explicitly scoped.",
+      "Treating example paths as active filesystem access.",
+      "Running external scans without approval."
+    ]
+  },
+  "token_optimization": "Keep a small security router and defer detailed rules to references.",
+  "selection_precision": "Rank for security/compliance coding-standard tasks only.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "cursor-rules-security-compliance",
+  "optimized_directory": "cursor-rules-security-compliance"
+}

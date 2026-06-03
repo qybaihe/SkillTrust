@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "cursor-rules-installer",
+  "source_package": "cursor-rules-awesome / installer-package",
+  "source_repository": "tonynguyennvt/cursor-rules-awesome",
+  "source_stars_queried_2026_06_03": "4",
+  "original_gate": "warn",
+  "optimized_posture": "warn-until-semantic-review-and-policy-approval",
+  "declared_intent": "Make rule installation explicit, reversible, and user-approved.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read package metadata and installer intent.",
+      "Prepare an install plan and backup plan.",
+      "Write .cursorrules only after user confirmation."
+    ],
+    "confirmation_required": [
+      "Running postinstall/init commands.",
+      "Overwriting existing .cursorrules.",
+      "Creating backups or changing project root files."
+    ],
+    "denied_by_default": [
+      "Silent postinstall mutation.",
+      "Reading secrets during install.",
+      "Network egress unrelated to package retrieval."
+    ]
+  },
+  "token_optimization": "Move installer behavior into explicit init policy and short setup checklist.",
+  "selection_precision": "Rank only for installing Cursor rules, not using rules during coding.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "cursor-rules-installer",
+  "optimized_directory": "cursor-rules-installer"
+}

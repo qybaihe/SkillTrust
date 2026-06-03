@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "auditing-security",
+  "source_package": "auditing-security",
+  "source_repository": "spencerpauly/awesome-cursor-skills",
+  "source_stars_queried_2026_06_03": "367",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Audit only the target codebase and keep secret scanning inside user-approved scope.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read target code, dependencies, configs, and docs.",
+      "Run local security/dependency checks in the target repo.",
+      "Write security reports and remediation plans."
+    ],
+    "confirmation_required": [
+      "Scanning outside the target repo.",
+      "Running exploit or network tests.",
+      "Editing code or configs."
+    ],
+    "denied_by_default": [
+      "Reading unrelated SSH keys, cloud credentials, browser profiles, or home-directory secrets.",
+      "Uploading findings without approval.",
+      "Treating security audit as permission to attack external systems."
+    ]
+  },
+  "token_optimization": "Move deterministic audit checklists into validators/scripts.",
+  "selection_precision": "Rank for codebase security audit, not Skill package audit or compliance-only review.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "auditing-security",
+  "optimized_directory": "auditing-security"
+}

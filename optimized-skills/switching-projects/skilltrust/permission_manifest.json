@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "switching-projects",
+  "source_package": "switching-projects",
+  "source_repository": "spencerpauly/awesome-cursor-skills",
+  "source_stars_queried_2026_06_03": "367",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Switch active project only after the user confirms the target path and scope change.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "List or inspect candidate workspaces only when requested.",
+      "Prepare a switch plan for the chosen target.",
+      "Update local context notes after confirmation."
+    ],
+    "confirmation_required": [
+      "Changing the active workspace.",
+      "Opening or modifying a new project.",
+      "Persisting cross-workspace memory."
+    ],
+    "denied_by_default": [
+      "Searching unrelated personal directories broadly.",
+      "Switching projects silently.",
+      "Copying files between projects without approval."
+    ]
+  },
+  "token_optimization": "Encode output format and switch checks in schema/config.",
+  "selection_precision": "Rank for explicit project-switching requests only.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "switching-projects",
+  "optimized_directory": "switching-projects"
+}

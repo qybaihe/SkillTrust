@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "incident-responder",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Status-page updates, customer communications, deploy changes, or remediation actions.",
+    "Using external incident systems.",
+    "Running Bash/Edit commands that change state."
+  ],
+  "deny_by_default": [
+    "Changing production without approval.",
+    "Accessing unrelated accounts or logs.",
+    "Publishing incident details externally."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "OneWave-AI/claude-skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "switching-projects",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Changing the active workspace.",
+    "Opening or modifying a new project.",
+    "Persisting cross-workspace memory."
+  ],
+  "deny_by_default": [
+    "Searching unrelated personal directories broadly.",
+    "Switching projects silently.",
+    "Copying files between projects without approval."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "spencerpauly/awesome-cursor-skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

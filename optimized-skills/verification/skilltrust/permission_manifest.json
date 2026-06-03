@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "verification",
+  "source_package": "verification",
+  "source_repository": "Aurite-ai/agent-verifier",
+  "source_stars_queried_2026_06_03": "39",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Route verification tasks to the right specialized verifier and produce a combined report.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read target specs, code summaries, and verifier outputs.",
+      "Delegate to specialized verification Skills when appropriate.",
+      "Write consolidated verification reports."
+    ],
+    "confirmation_required": [
+      "Running code or tests.",
+      "Editing source files.",
+      "Reading outside the selected target."
+    ],
+    "denied_by_default": [
+      "Changing code under the name of verification.",
+      "Collecting secrets.",
+      "Using every verifier when only one is needed."
+    ]
+  },
+  "token_optimization": "Move repeated severity schema and report templates into references/config.",
+  "selection_precision": "Use as orchestrator; delegate to specialized verify-* Skills rather than competing with them.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "verification",
+  "optimized_directory": "verification"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "invoice-organizer",
+  "source_package": "invoice-organizer",
+  "source_repository": "ComposioHQ/awesome-claude-skills",
+  "source_stars_queried_2026_06_03": "63,040",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Organize only user-selected invoice files while preserving originals and protecting financial metadata.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-selected invoice files or folders.",
+      "Extract invoice metadata for local reports.",
+      "Write organized copies and manifests to approved output folders."
+    ],
+    "confirmation_required": [
+      "Moving, renaming, deleting, or overwriting originals.",
+      "Uploading invoices or metadata.",
+      "Processing folders recursively."
+    ],
+    "denied_by_default": [
+      "Reading unrelated financial, tax, or banking files.",
+      "Printing sensitive invoice data into public logs.",
+      "External transmission without explicit approval."
+    ]
+  },
+  "token_optimization": "Move extraction schemas, naming rules, and checklist logic into config/validators.",
+  "selection_precision": "Trigger only for invoice organization and metadata extraction, not broad finance advice.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "invoice-organizer",
+  "optimized_directory": "invoice-organizer"
+}

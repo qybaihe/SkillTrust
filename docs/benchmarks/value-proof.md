@@ -6,6 +6,8 @@ This page turns the public benchmark into a value proof: SkillTrust does not onl
 
 Chinese version: [SkillTrust 价值证明](value-proof.zh-CN.md).
 
+Optimized preview package: [optimized-skills](../../optimized-skills/).
+
 The numbers below come from the preliminary static benchmark of 28 representative public AI Skill, Claude Skill, Cursor rule, and Agent instruction packages. Several targets were audited in `network-limited` mode, so the results are best read as a representative sample rather than a full supply-chain audit.
 
 ## Evaluation Dimensions

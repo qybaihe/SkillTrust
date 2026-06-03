@@ -67,6 +67,12 @@ See [Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchm
 
 Full evaluated sample catalog with source links, download links, and GitHub star counts: [Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md). Chinese version: [被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md).
 
+## Optimized Skill Pack
+
+SkillTrust also includes a public [optimized-skills](optimized-skills/) preview pack. It contains 28 generated Skill packages based on the benchmark sample, each with a compact `SKILL.md`, least-privilege permission manifest, runtime policy overlay, and optimization summary.
+
+These packages show how SkillTrust turns evaluated Skills into more intent-bound, token-efficient, and selection-precise versions. They are not official upstream releases; they are reviewable preview packages for testing.
+
 ## Value Proof: Allow Is Not The Finish Line
 
 SkillTrust also generated optimization plans for the same public sample. The goal is not only to say whether a package is installable, but to make it slimmer, more intent-bound, and easier for an Agent to select precisely:

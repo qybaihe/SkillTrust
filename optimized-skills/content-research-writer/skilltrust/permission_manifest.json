@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "content-research-writer",
+  "source_package": "content-research-writer",
+  "source_repository": "ComposioHQ/awesome-claude-skills",
+  "source_stars_queried_2026_06_03": "63,040",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Produce research-backed writing inside a user-confirmed project folder with clear source handling.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-provided briefs, notes, and source documents.",
+      "Write drafts, outlines, and revision notes inside the chosen workspace.",
+      "Use web research only when the user asks for current or external evidence."
+    ],
+    "confirmation_required": [
+      "Creating new writing folders outside the workspace.",
+      "Publishing, emailing, or uploading drafts.",
+      "Using connector accounts or private documents."
+    ],
+    "denied_by_default": [
+      "Reading unrelated personal files.",
+      "Inventing citations or copying long copyrighted passages.",
+      "Treating Drive or document automation as implied permission."
+    ]
+  },
+  "token_optimization": "Move rubrics, examples, style libraries, and review workflows into references.",
+  "selection_precision": "Distinguish research-writing from Drive automation, document formatting, and generic summarization.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "content-research-writer",
+  "optimized_directory": "content-research-writer"
+}

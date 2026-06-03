@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "mcp-builder",
+  "source_package": "mcp-builder",
+  "source_repository": "anthropics/skills",
+  "source_stars_queried_2026_06_03": "145,914",
+  "original_gate": "warn",
+  "optimized_posture": "warn-until-semantic-review-and-policy-approval",
+  "declared_intent": "Help build MCP servers with explicit runtime boundaries, generated-code labels, and least-privilege defaults.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read and write MCP project files inside the user-confirmed workspace.",
+      "Generate server templates, schemas, and local test scripts.",
+      "Read named environment variable names without printing secret values."
+    ],
+    "confirmation_required": [
+      "Installing dependencies or running generated servers.",
+      "Adding external API endpoints or network egress.",
+      "Writing credentials, tokens, or deployment config."
+    ],
+    "denied_by_default": [
+      "Printing or exfiltrating secret values.",
+      "Treating reference/example code as permission to access the host filesystem.",
+      "Broad filesystem reads outside the MCP project."
+    ]
+  },
+  "token_optimization": "Keep server-type routing in the Skill; move Node/Python templates, evaluation checklists, and best practices into references/scripts.",
+  "selection_precision": "Rank for MCP server-building tasks only; avoid triggering on generic API docs or package setup.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "mcp-builder",
+  "optimized_directory": "mcp-builder"
+}

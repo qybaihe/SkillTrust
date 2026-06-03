@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "googledrive-automation",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Deleting, sharing, moving, or overwriting Drive files.",
+    "Changing permissions or external visibility.",
+    "Touching files outside the user-selected Drive scope."
+  ],
+  "deny_by_default": [
+    "Using OAuth grants as open-ended authority.",
+    "Accessing unrelated Drive folders.",
+    "Exporting Drive data to unapproved destinations."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "ComposioHQ/awesome-claude-skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

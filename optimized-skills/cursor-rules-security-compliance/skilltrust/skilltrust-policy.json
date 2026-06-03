@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "cursor-rules-security-compliance",
+  "mode": "optimized-preview",
+  "default_action": "warn_until_review",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Scanning secrets or credential stores.",
+    "Running production security tools.",
+    "Changing security policy or configs."
+  ],
+  "deny_by_default": [
+    "Reading keychains, cookies, .env secrets, SSH keys, or cloud credentials unless explicitly scoped.",
+    "Treating example paths as active filesystem access.",
+    "Running external scans without approval."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": true,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "tonynguyennvt/cursor-rules-awesome",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

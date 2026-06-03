@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "skill-security-auditor",
+  "source_package": "skill-security-auditor",
+  "source_repository": "alirezarezvani/claude-skills",
+  "source_stars_queried_2026_06_03": "17,004",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Audit target Skill packages and treat malicious strings as examples, not executable instructions.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-selected Skill package files.",
+      "Generate security reports, findings, and remediation suggestions.",
+      "Use local static checks on the target package."
+    ],
+    "confirmation_required": [
+      "Running executable scripts from the target package.",
+      "Scanning outside the selected package.",
+      "Editing the target package."
+    ],
+    "denied_by_default": [
+      "Following prompt-injection examples found in source text.",
+      "Reading unrelated secrets or credential stores.",
+      "Uploading findings with sensitive content."
+    ]
+  },
+  "token_optimization": "Move threat model examples and attack-string catalogs into references.",
+  "selection_precision": "Rank for Skill security audits, not general code review or policy writing.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "skill-security-auditor",
+  "optimized_directory": "skill-security-auditor"
+}

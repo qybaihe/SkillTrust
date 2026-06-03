@@ -67,6 +67,12 @@ SkillTrust 已对 28 个来自热门公开 AI Skill、Claude Skill、Cursor rule
 
 完整被评测样本清单、来源链接、下载链接和 GitHub Stars：[被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md)。英文版：[Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md)。
 
+## 优化版 Skill 包
+
+SkillTrust 现在也包含一个公开的 [optimized-skills](optimized-skills/) preview pack。这里有 28 个基于 benchmark 样本生成的优化版 Skill packages，每个都包含精简 `SKILL.md`、最小权限 manifest、runtime policy overlay 和 optimization summary。
+
+这些 package 用来展示 SkillTrust 如何把被评测 Skills 变成更受意图约束、更省 token、更容易被 Agent 精准选择的版本。它们不是上游官方 release，而是可审查、可测试的 preview packages。
+
 ## Value Proof：Allow 不是终点
 
 SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判断能不能安装，而是把 package 变得更精简、更受意图约束，也更容易被 Agent 精准选择：

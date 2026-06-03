@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "agent-army",
+  "source_package": "agent-army",
+  "source_repository": "OneWave-AI/claude-skills",
+  "source_stars_queried_2026_06_03": "169",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Coordinate bounded multi-agent work with file ownership, concurrency caps, and approval thresholds.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Plan parallel subtasks inside the current workspace.",
+      "Spawn or coordinate agents only when the host supports it and the user asks for it.",
+      "Write reports or patches in assigned file scopes."
+    ],
+    "confirmation_required": [
+      "More than three concurrent agents.",
+      "Continuous or autonomous mode.",
+      "Any task that touches credentials, production, or external accounts."
+    ],
+    "denied_by_default": [
+      "Unbounded fan-out.",
+      "Agents modifying overlapping files without coordination.",
+      "Background work beyond the user-approved scope."
+    ]
+  },
+  "token_optimization": "Move orchestration templates and role matrices into config/references.",
+  "selection_precision": "Rank for explicit multi-agent delegation, not ordinary task planning.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "agent-army",
+  "optimized_directory": "agent-army"
+}

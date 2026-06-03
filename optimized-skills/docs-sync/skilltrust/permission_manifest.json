@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "docs-sync",
+  "source_package": "docs-sync",
+  "source_repository": "chriscox/agent-skills",
+  "source_stars_queried_2026_06_03": "10",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Sync docs within a confirmed repository root and keep writes reviewable.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read docs, README, config, templates, and git status in the repo.",
+      "Write doc updates inside approved doc paths.",
+      "Run local documentation checks."
+    ],
+    "confirmation_required": [
+      "Branch creation, commits, pushes, or GitHub issue/PR actions.",
+      "Writing outside approved doc paths.",
+      "Deleting docs."
+    ],
+    "denied_by_default": [
+      "Scanning unrelated repos.",
+      "Uploading private docs externally.",
+      "Changing source code unless explicitly requested."
+    ]
+  },
+  "token_optimization": "Move detailed quality checklists into references/config.",
+  "selection_precision": "Rank for documentation sync, not general writing or project planning.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "docs-sync",
+  "optimized_directory": "docs-sync"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "cursor-rules-installer",
+  "mode": "optimized-preview",
+  "default_action": "warn_until_review",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Running postinstall/init commands.",
+    "Overwriting existing .cursorrules.",
+    "Creating backups or changing project root files."
+  ],
+  "deny_by_default": [
+    "Silent postinstall mutation.",
+    "Reading secrets during install.",
+    "Network egress unrelated to package retrieval."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": true,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "tonynguyennvt/cursor-rules-awesome",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

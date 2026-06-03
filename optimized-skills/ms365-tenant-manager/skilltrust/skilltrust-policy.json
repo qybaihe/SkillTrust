@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "ms365-tenant-manager",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Any Graph, PowerShell, or tenant write action.",
+    "User, group, policy, license, or security setting changes.",
+    "Using admin credentials or connector sessions."
+  ],
+  "deny_by_default": [
+    "Tenant-wide changes without named scope.",
+    "Reading unrelated local credentials.",
+    "Executing production changes without dry-run and approval."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "alirezarezvani/claude-skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

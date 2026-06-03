@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "pdf",
+  "source_package": "pdf",
+  "source_repository": "anthropics/skills",
+  "source_stars_queried_2026_06_03": "145,914",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Process only user-specified PDF files and write outputs to user-approved locations.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-selected PDF files.",
+      "Render, extract, summarize, or validate PDF content.",
+      "Write derived reports, images, or form outputs to the current workspace."
+    ],
+    "confirmation_required": [
+      "Editing or overwriting original PDFs.",
+      "Reading folders of PDFs recursively.",
+      "Uploading PDF content to external systems."
+    ],
+    "denied_by_default": [
+      "Reading unrelated documents or personal directories.",
+      "Accessing credential stores or browser profiles.",
+      "Deleting original documents."
+    ]
+  },
+  "token_optimization": "Keep common PDF workflow in SKILL.md; defer form, rendering, and advanced validation details to references/scripts.",
+  "selection_precision": "Trigger only for PDF-specific tasks; avoid competing with generic document-writing Skills.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "pdf",
+  "optimized_directory": "pdf"
+}

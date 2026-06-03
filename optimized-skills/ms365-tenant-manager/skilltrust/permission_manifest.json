@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "ms365-tenant-manager",
+  "source_package": "ms365-tenant-manager",
+  "source_repository": "alirezarezvani/claude-skills",
+  "source_stars_queried_2026_06_03": "17,004",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Plan and perform tenant-scoped Microsoft 365 actions with dry-run defaults and explicit approval gates.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-provided tenant context and requested admin scope.",
+      "Generate PowerShell/Graph plans and dry-run scripts.",
+      "Write local admin plans, manifests, and rollback notes."
+    ],
+    "confirmation_required": [
+      "Any Graph, PowerShell, or tenant write action.",
+      "User, group, policy, license, or security setting changes.",
+      "Using admin credentials or connector sessions."
+    ],
+    "denied_by_default": [
+      "Tenant-wide changes without named scope.",
+      "Reading unrelated local credentials.",
+      "Executing production changes without dry-run and approval."
+    ]
+  },
+  "token_optimization": "Move PowerShell templates and troubleshooting into references/scripts.",
+  "selection_precision": "Rank for explicit M365 tenant administration, not generic cloud or compliance tasks.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "ms365-tenant-manager",
+  "optimized_directory": "ms365-tenant-manager"
+}

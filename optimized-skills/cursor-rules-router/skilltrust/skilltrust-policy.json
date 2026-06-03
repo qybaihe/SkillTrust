@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "cursor-rules-router",
+  "mode": "optimized-preview",
+  "default_action": "warn_until_review",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Installing or writing .cursorrules into a project.",
+    "Loading broad security/compliance rules for unrelated tasks.",
+    "Changing project configuration."
+  ],
+  "deny_by_default": [
+    "Treating examples about cookies, keychains, or .env files as permission to read local secrets.",
+    "Loading all 4,861 lines as always-on context.",
+    "Automatic project mutation."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": true,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "tonynguyennvt/cursor-rules-awesome",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

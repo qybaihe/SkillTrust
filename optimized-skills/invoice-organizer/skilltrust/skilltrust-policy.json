@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "invoice-organizer",
+  "mode": "optimized-preview",
+  "default_action": "allow_with_policy",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Moving, renaming, deleting, or overwriting originals.",
+    "Uploading invoices or metadata.",
+    "Processing folders recursively."
+  ],
+  "deny_by_default": [
+    "Reading unrelated financial, tax, or banking files.",
+    "Printing sensitive invoice data into public logs.",
+    "External transmission without explicit approval."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": false,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "ComposioHQ/awesome-claude-skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "skill-creator",
+  "source_package": "skill-creator",
+  "source_repository": "anthropics/skills",
+  "source_stars_queried_2026_06_03": "145,914",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Help an Agent create or improve a Skill package while keeping the activation harness compact and testable.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read and edit files inside the user-confirmed Skill package only.",
+      "Create references, scripts, assets, and validation artifacts inside that package.",
+      "Run local validation commands requested by the user or required by the package."
+    ],
+    "confirmation_required": [
+      "Creating or deleting files outside the active Skill package.",
+      "Running sub-agent evaluation or benchmark workflows.",
+      "Packaging artifacts for publication."
+    ],
+    "denied_by_default": [
+      "Reading unrelated home-directory secrets, browser profiles, SSH keys, or cloud credentials.",
+      "Publishing or installing generated Skills without explicit user approval."
+    ]
+  },
+  "token_optimization": "Move examples, rubrics, and evaluation depth into references; keep SKILL.md as a compact router.",
+  "selection_precision": "Use positive triggers around Skill creation/update/validation and negative triggers for unrelated document or app generation.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "skill-creator",
+  "optimized_directory": "skill-creator"
+}

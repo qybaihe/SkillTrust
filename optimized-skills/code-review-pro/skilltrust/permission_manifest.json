@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "code-review-pro",
+  "source_package": "code-review-pro",
+  "source_repository": "OneWave-AI/claude-skills",
+  "source_stars_queried_2026_06_03": "169",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Review code changes within a confirmed repository and produce prioritized findings.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read target code, diffs, tests, and docs inside the repo.",
+      "Run local static checks or tests when appropriate.",
+      "Write review reports."
+    ],
+    "confirmation_required": [
+      "Editing code instead of reviewing.",
+      "Scanning unrelated repos or personal files.",
+      "Uploading review artifacts externally."
+    ],
+    "denied_by_default": [
+      "Reading secrets or credential stores.",
+      "Inventing findings without evidence.",
+      "Changing production systems."
+    ]
+  },
+  "token_optimization": "Move review rubrics and examples into references.",
+  "selection_precision": "Rank for code review, not architecture design or security-only audits.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "code-review-pro",
+  "optimized_directory": "code-review-pro"
+}

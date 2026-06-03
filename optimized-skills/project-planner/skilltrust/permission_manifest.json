@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "project-planner",
+  "source_package": "project-planner",
+  "source_repository": "chriscox/agent-skills",
+  "source_stars_queried_2026_06_03": "10",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Plan project work and create reviewable proposals before any GitHub or branch mutation.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read project docs, issue templates, and current git state.",
+      "Write local proposals, plans, and issue drafts.",
+      "Prepare GitHub issue payloads without submitting."
+    ],
+    "confirmation_required": [
+      "Creating GitHub issues or GraphQL sub-issues.",
+      "Creating branches, committing, or pushing.",
+      "Changing repo state."
+    ],
+    "denied_by_default": [
+      "Mutating GitHub without user approval.",
+      "Planning across unrelated repos.",
+      "Reading credentials or private accounts."
+    ]
+  },
+  "token_optimization": "Move proposal checklist and issue workflow mechanics into references/scripts.",
+  "selection_precision": "Rank for planning/proposal tasks, not broad GitHub automation.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "project-planner",
+  "optimized_directory": "project-planner"
+}

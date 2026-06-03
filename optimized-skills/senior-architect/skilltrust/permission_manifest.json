@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "senior-architect",
+  "source_package": "senior-architect",
+  "source_repository": "alirezarezvani/claude-skills",
+  "source_stars_queried_2026_06_03": "17,004",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Analyze architecture inside user-confirmed project boundaries and produce design recommendations.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read code, docs, and configs in the selected project.",
+      "Run local dependency or architecture analysis tools.",
+      "Write diagrams, tradeoff notes, and decision records."
+    ],
+    "confirmation_required": [
+      "Scanning outside the project root.",
+      "Changing architecture files or build configs.",
+      "Running external dependency scans or uploads."
+    ],
+    "denied_by_default": [
+      "Reading unrelated secrets or personal files.",
+      "Changing production infrastructure.",
+      "Treating architecture review as deployment permission."
+    ]
+  },
+  "token_optimization": "Move pattern libraries and decision frameworks into references.",
+  "selection_precision": "Rank for architecture/design tasks, not code review or project planning.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "senior-architect",
+  "optimized_directory": "senior-architect"
+}

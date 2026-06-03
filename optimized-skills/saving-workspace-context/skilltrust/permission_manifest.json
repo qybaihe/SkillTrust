@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "saving-workspace-context",
+  "source_package": "saving-workspace-context",
+  "source_repository": "spencerpauly/awesome-cursor-skills",
+  "source_stars_queried_2026_06_03": "367",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Persist useful context inside the current workspace unless the user approves global memory.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read current project notes, docs, and relevant conversation summary.",
+      "Append or update workspace-local context files.",
+      "Generate restore summaries for the same workspace."
+    ],
+    "confirmation_required": [
+      "Creating global rules, Skills, or cross-workspace memory.",
+      "Writing outside the workspace.",
+      "Deleting or overwriting memory files."
+    ],
+    "denied_by_default": [
+      "Saving secrets, tokens, private keys, or unrelated personal data.",
+      "Cross-project leakage.",
+      "Silent global persistence."
+    ]
+  },
+  "token_optimization": "Move routing rules and memory schema into config.",
+  "selection_precision": "Rank for workspace-memory tasks, not project switching or documentation sync.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "saving-workspace-context",
+  "optimized_directory": "saving-workspace-context"
+}

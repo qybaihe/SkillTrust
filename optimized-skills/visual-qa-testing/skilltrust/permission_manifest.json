@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "visual-qa-testing",
+  "source_package": "visual-qa-testing",
+  "source_repository": "spencerpauly/awesome-cursor-skills",
+  "source_stars_queried_2026_06_03": "367",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Run visual QA only against local or user-specified URLs and keep captured artifacts scoped.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Navigate to local or explicitly user-approved URLs.",
+      "Collect screenshots, console errors, and network observations.",
+      "Write QA reports and annotated findings."
+    ],
+    "confirmation_required": [
+      "Accessing authenticated or unrelated sites.",
+      "Changing application state or submitting forms.",
+      "Uploading screenshots/traces."
+    ],
+    "denied_by_default": [
+      "Reading browser cookies or credential stores.",
+      "Testing unrelated websites.",
+      "Capturing personal data without user scope."
+    ]
+  },
+  "token_optimization": "Move procedural visual QA steps into references/schema.",
+  "selection_precision": "Rank for visual QA, not generic browser automation.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "visual-qa-testing",
+  "optimized_directory": "visual-qa-testing"
+}

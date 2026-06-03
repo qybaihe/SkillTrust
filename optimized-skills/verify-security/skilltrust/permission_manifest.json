@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "verify-security",
+  "source_package": "verify-security",
+  "source_repository": "Aurite-ai/agent-verifier",
+  "source_stars_queried_2026_06_03": "39",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Perform read-only security verification against user-provided specs or code summaries.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read selected code/specs/docs.",
+      "Check security claims against policy and evidence.",
+      "Write verification findings."
+    ],
+    "confirmation_required": [
+      "Running active scans or exploit tests.",
+      "Reading secrets or credential stores.",
+      "Editing code."
+    ],
+    "denied_by_default": [
+      "Treating review as operational access.",
+      "Scanning unrelated systems.",
+      "Publishing sensitive findings."
+    ]
+  },
+  "token_optimization": "Move deterministic red-lines and severity schemas into validators.",
+  "selection_precision": "Trigger for security verification, not general quality, language, or pattern review.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "verify-security",
+  "optimized_directory": "verify-security"
+}

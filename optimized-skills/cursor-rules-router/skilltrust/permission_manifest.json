@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "cursor-rules-router",
+  "source_package": "cursor-rules-awesome / monolithic-rules",
+  "source_repository": "tonynguyennvt/cursor-rules-awesome",
+  "source_stars_queried_2026_06_03": "4",
+  "original_gate": "warn",
+  "optimized_posture": "warn-until-semantic-review-and-policy-approval",
+  "declared_intent": "Route to only the relevant domain rules instead of loading every rule into every task.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read the current project stack and task intent.",
+      "Load one to three relevant rule references.",
+      "Write a scoped rule-selection report."
+    ],
+    "confirmation_required": [
+      "Installing or writing .cursorrules into a project.",
+      "Loading broad security/compliance rules for unrelated tasks.",
+      "Changing project configuration."
+    ],
+    "denied_by_default": [
+      "Treating examples about cookies, keychains, or .env files as permission to read local secrets.",
+      "Loading all 4,861 lines as always-on context.",
+      "Automatic project mutation."
+    ]
+  },
+  "token_optimization": "Replace monolithic always-on rules with a short router plus domain references.",
+  "selection_precision": "Rank relevant domain rules above generic all-purpose rules.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "cursor-rules-router",
+  "optimized_directory": "cursor-rules-router"
+}

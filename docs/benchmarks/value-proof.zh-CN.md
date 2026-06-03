@@ -4,6 +4,8 @@
 
 英文版：[SkillTrust Value Proof](value-proof.md)。
 
+优化版 preview package：[optimized-skills](../../optimized-skills/)。
+
 这份报告把公开 benchmark 从“是否 allow / warn / block”升级为价值证明：SkillTrust 不只是判断一个 AI Skill package 能不能安装，还会生成优化计划，让它更精简、更受意图约束、更容易被 Agent 精准选择。
 
 下面的数据来自 28 个具有代表性的公开 AI Skill、Claude Skill、Cursor rules 和 Agent instruction packages。部分目标是在 `network-limited` 模式下通过 raw file、页面快照或 package snapshot 审计，因此这些数字适合理解为代表性静态样本，而不是完整供应链审计。

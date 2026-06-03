@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "verify-quality",
+  "source_package": "verify-quality",
+  "source_repository": "Aurite-ai/agent-verifier",
+  "source_stars_queried_2026_06_03": "39",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Assess quality/readiness evidence without changing implementation.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read selected code, specs, test summaries, and docs.",
+      "Assess quality criteria and readiness risks.",
+      "Write quality verification reports."
+    ],
+    "confirmation_required": [
+      "Running tests or build commands.",
+      "Editing code.",
+      "Changing release status."
+    ],
+    "denied_by_default": [
+      "Approving release without evidence.",
+      "Reading unrelated secrets.",
+      "Replacing human approval for high-risk launches."
+    ]
+  },
+  "token_optimization": "Move quality criteria and report schema into references/config.",
+  "selection_precision": "Trigger for quality/readiness verification, not security or language-only review.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "verify-quality",
+  "optimized_directory": "verify-quality"
+}

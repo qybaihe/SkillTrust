@@ -1,0 +1,28 @@
+{
+  "schema_version": "skilltrust.policy.v1",
+  "package": "mcp-builder",
+  "mode": "optimized-preview",
+  "default_action": "warn_until_review",
+  "scope_binding_required": true,
+  "user_confirmation_required_for": [
+    "Installing dependencies or running generated servers.",
+    "Adding external API endpoints or network egress.",
+    "Writing credentials, tokens, or deployment config."
+  ],
+  "deny_by_default": [
+    "Printing or exfiltrating secret values.",
+    "Treating reference/example code as permission to access the host filesystem.",
+    "Broad filesystem reads outside the MCP project."
+  ],
+  "preserve_deterministic_evidence": true,
+  "agent_semantic_review": {
+    "required": true,
+    "instruction": "Read SKILL.md and skilltrust/permission_manifest.json before deciding whether the preview is suitable for the current task."
+  },
+  "provenance": {
+    "source_repository": "anthropics/skills",
+    "generated_by": "SkillTrust",
+    "generated_at": "2026-06-03",
+    "source_link_reference": "See optimized-skills/manifest.json for source_url."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "incident-responder",
+  "source_package": "incident-responder",
+  "source_repository": "OneWave-AI/claude-skills",
+  "source_stars_queried_2026_06_03": "169",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Investigate incidents within a declared scope while gating production-facing actions.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "Read user-provided logs, alerts, runbooks, and relevant code.",
+      "Draft timelines, hypotheses, and response checklists.",
+      "Write local incident notes and postmortem drafts."
+    ],
+    "confirmation_required": [
+      "Status-page updates, customer communications, deploy changes, or remediation actions.",
+      "Using external incident systems.",
+      "Running Bash/Edit commands that change state."
+    ],
+    "denied_by_default": [
+      "Changing production without approval.",
+      "Accessing unrelated accounts or logs.",
+      "Publishing incident details externally."
+    ]
+  },
+  "token_optimization": "Move response playbooks and communication templates into references.",
+  "selection_precision": "Rank for declared incident response, not generic debugging or compliance.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "incident-responder",
+  "optimized_directory": "incident-responder"
+}

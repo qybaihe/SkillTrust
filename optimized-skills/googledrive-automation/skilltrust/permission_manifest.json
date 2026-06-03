@@ -1,0 +1,33 @@
+{
+  "schema_version": "skilltrust.permission_manifest.v1",
+  "package": "googledrive-automation",
+  "source_package": "googledrive-automation",
+  "source_repository": "ComposioHQ/awesome-claude-skills",
+  "source_stars_queried_2026_06_03": "63,040",
+  "original_gate": "allow",
+  "optimized_posture": "allow-with-policy",
+  "declared_intent": "Perform session-scoped Google Drive actions that match the user request and connector consent.",
+  "minimal_permissions": {
+    "allowed_by_default": [
+      "List, search, read, create, or update Drive files only when requested.",
+      "Use connector tools authorized by the current session.",
+      "Write local summaries or manifests for performed actions."
+    ],
+    "confirmation_required": [
+      "Deleting, sharing, moving, or overwriting Drive files.",
+      "Changing permissions or external visibility.",
+      "Touching files outside the user-selected Drive scope."
+    ],
+    "denied_by_default": [
+      "Using OAuth grants as open-ended authority.",
+      "Accessing unrelated Drive folders.",
+      "Exporting Drive data to unapproved destinations."
+    ]
+  },
+  "token_optimization": "Keep connector intent and safety boundaries in SKILL.md; move operation maps into policy/config.",
+  "selection_precision": "Rank for explicit Google Drive tasks, not generic writing or file organization.",
+  "review_status": "preview-only; user should review before installation",
+  "source_link_reference": "See optimized-skills/manifest.json for source_url.",
+  "optimized_declared_name": "googledrive-automation",
+  "optimized_directory": "googledrive-automation"
+}
