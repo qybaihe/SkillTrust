@@ -73,6 +73,66 @@ SkillTrust also includes a public [optimized-skills](optimized-skills/) preview 
 
 These packages show how SkillTrust turns evaluated Skills into more intent-bound, token-efficient, and selection-precise versions. They are not official upstream releases; they are reviewable preview packages for testing.
 
+## Web Demo
+
+SkillTrust now includes a local Web demo for the UCWS Singapore Hackathon 2026 Skill track.
+
+The demo turns the CLI pipeline into an AI governance console:
+
+- upload a `.zip` Skill package or a single `SKILL.md`
+- run deterministic intent and permission analysis
+- generate `analysis.json`, `trust_report.md`, `permission_manifest.json`, `skilltrust-policy.json`, `audit_receipt.json`, `remediation_plan.md`, `semantic_review_request.json`, and `semantic_review_instructions.md`
+- call a Pi-compatible Agent Review Adapter using an OpenAI-compatible MIMO endpoint
+- fuse deterministic evidence with Agent semantic judgment
+- download an optimized preview Skill zip and the full artifact bundle
+
+### Local Demo
+
+```bash
+cd "demo-web"
+npm install
+npm run dev
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
+
+### MIMO Semantic Reviewer
+
+Create `demo-web/.env.local` or export the variables in your shell:
+
+```bash
+MIMO_BASE_URL=https://token-plan-cn.xiaomimimo.com/v1
+MIMO_API_KEY=<user-provided-key>
+MIMO_MODEL=mimo-v2.5-pro
+```
+
+Do not commit API keys. `demo-web/.env.local`, `demo-web/.env`, and `demo-web/.runs/` are ignored by Git.
+
+If `MIMO_API_KEY` is missing or the endpoint is unavailable, the demo continues in deterministic-only fallback mode and displays that status in the UI.
+
+### Demo Workflow
+
+1. Upload a Skill package or click one of the built-in fixture buttons.
+2. Watch the five-step pipeline: Unpack Skill, Deterministic Evidence, Agent Semantic Review, Policy Fusion, Optimized Package.
+3. Review the final `allow`, `warn`, or `block` action, Trust Fit Score, risk level, permission overreach, semantic review summary, policy overlay, and remediation suggestions.
+4. Download `optimized-skill.zip`, `artifacts.zip`, or individual reports.
+
+Built-in fixture expectations:
+
+| Fixture | Expected Final Action |
+| --- | --- |
+| `fixtures/benign-pdf-skill` | `allow` |
+| `fixtures/overprivileged-research-skill` | `warn` |
+| `fixtures/malicious-like-writing-skill` | `block` |
+
+Screenshot placeholder: local demo screenshots can be captured from `http://localhost:3000`.
+
+Deployed URL placeholder: Local Demo.
+
 ## Value Proof: Allow Is Not The Finish Line
 
 SkillTrust also generated optimization plans for the same public sample. The goal is not only to say whether a package is installable, but to make it slimmer, more intent-bound, and easier for an Agent to select precisely:

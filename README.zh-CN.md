@@ -73,6 +73,66 @@ SkillTrust 现在也包含一个公开的 [optimized-skills](optimized-skills/) 
 
 这些 package 用来展示 SkillTrust 如何把被评测 Skills 变成更受意图约束、更省 token、更容易被 Agent 精准选择的版本。它们不是上游官方 release，而是可审查、可测试的 preview packages。
 
+## Web Demo
+
+SkillTrust 现在包含一个面向 UCWS Singapore Hackathon 2026 Skill 赛道的本地 Web demo。
+
+Demo 将 CLI 流程包装成一个 AI governance console：
+
+- 上传 `.zip` Skill package 或单个 `SKILL.md`
+- 运行 deterministic intent / permission analysis
+- 生成 `analysis.json`、`trust_report.md`、`permission_manifest.json`、`skilltrust-policy.json`、`audit_receipt.json`、`remediation_plan.md`、`semantic_review_request.json`、`semantic_review_instructions.md`
+- 通过 Pi-compatible Agent Review Adapter 调用 OpenAI-compatible MIMO endpoint
+- 将 deterministic evidence 与 Agent semantic judgment 融合
+- 下载优化后的 preview Skill zip 与完整 artifacts zip
+
+### 本地运行
+
+```bash
+cd "demo-web"
+npm install
+npm run dev
+```
+
+打开：
+
+```text
+http://localhost:3000
+```
+
+### MIMO 语义审查环境变量
+
+在 `demo-web/.env.local` 中配置，或在 shell 中导出：
+
+```bash
+MIMO_BASE_URL=https://token-plan-cn.xiaomimimo.com/v1
+MIMO_API_KEY=<user-provided-key>
+MIMO_MODEL=mimo-v2.5-pro
+```
+
+不要提交 API Key。`demo-web/.env.local`、`demo-web/.env`、`demo-web/.runs/` 已被 `.gitignore` 忽略。
+
+如果没有配置 `MIMO_API_KEY`，或 endpoint 暂不可用，Demo 会自动进入 deterministic-only fallback mode，并在页面中提示。
+
+### 演示流程
+
+1. 上传 Skill package，或点击页面内置 fixture。
+2. 查看五步进度：Unpack Skill、Deterministic Evidence、Agent Semantic Review、Policy Fusion、Optimized Package。
+3. 查看最终 `allow`、`warn`、`block` 决策，Trust Fit Score、Risk Level、permission overreach、semantic review summary、policy overlay 和 remediation suggestions。
+4. 下载 `optimized-skill.zip`、`artifacts.zip` 或单个报告文件。
+
+内置 fixture 预期：
+
+| Fixture | 预期 Final Action |
+| --- | --- |
+| `fixtures/benign-pdf-skill` | `allow` |
+| `fixtures/overprivileged-research-skill` | `warn` |
+| `fixtures/malicious-like-writing-skill` | `block` |
+
+截图占位：从 `http://localhost:3000` 截取本地 Demo 截图。
+
+部署地址占位：Local Demo。
+
 ## Value Proof：Allow 不是终点
 
 SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判断能不能安装，而是把 package 变得更精简、更受意图约束，也更容易被 Agent 精准选择：
