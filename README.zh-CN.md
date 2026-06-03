@@ -112,7 +112,19 @@ skilltrust analyze fixtures/overprivileged-research-skill
 
 ### 作为本地 Codex Skill 安装
 
-如果希望宿主 Agent 能把 SkillTrust 当成本地 Skill 使用，可以克隆到 Codex skills 目录：
+#### 一句话交给 AI Agent 安装
+
+把下面这段提示词发给 Codex 或其他本地 coding Agent：
+
+```text
+请把 SkillTrust 从 https://github.com/qybaihe/SkillTrust 安装为本地 Codex Skill。将仓库 clone 或更新到 ~/.codex/skills/skilltrust，进入目录后用 python -m pip install -e . 安装 CLI，并验证 skilltrust --help 和 python -m skilltrust --help 都可以运行。安装完成后，请立即运行一次只读的本地 Skill 组合审计：skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all。不要自动修改、重命名或修复任何现有本地 Skill，只生成报告、policy overlay 和需要用户审批的计划。最后请总结 allow/warn/block 数量、危险或越权 findings，以及下一步最安全的 remediation 建议。
+```
+
+这段提示词会让宿主 Agent 一次性完成：安装 SkillTrust、验证命令、审计本地 Skill 生态，并在没有用户明确批准前保持所有真实 Skill 不变。
+
+#### 手动安装
+
+如果希望自己手动安装，可以克隆到 Codex skills 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -121,7 +133,13 @@ cd ~/.codex/skills/skilltrust
 python -m pip install -e .
 ```
 
-之后可以让 Agent 使用 `SkillTrust` 审计某个 Skill 包。根目录的 `SKILL.md` 里写了完整工作流。
+之后可以这样要求 Agent：
+
+```text
+请使用 SkillTrust 对我的本地 Codex Skills 做一次只读审计，告诉我哪些 Skill 可能越权、危险，或者值得优化。
+```
+
+根目录的 `SKILL.md` 里写了 Agent 加载 SkillTrust 后应该遵循的工作流。
 
 ## 快速开始
 

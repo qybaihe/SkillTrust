@@ -1,3 +1,8 @@
+---
+name: skilltrust
+description: Use when auditing, installing, reviewing, or governing AI Skill packages for intent-bound least-privilege permissions, overprivileged behavior, dangerous data flows, host-Agent semantic review, local Codex Skill portfolio safety, policy overlays, remediation plans, token efficiency, or taxonomy conflicts.
+---
+
 # SkillTrust
 
 ## Description
@@ -23,6 +28,27 @@ Use this Skill when the user asks to:
 - detect overprivileged or malicious-like Skill behavior
 - produce a reproducible trust report or audit receipt
 - prepare a Skill for registry, marketplace, hackathon, or enterprise review
+- check whether local Codex Skills are overprivileged, dangerous, ambiguous, or worth optimizing
+
+## First-Run Behavior
+
+When this Skill is loaded without a specific target path, recommend a read-only local Skill portfolio audit first:
+
+```bash
+skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all
+```
+
+Use this first-run audit to answer:
+
+- which local Skills are `allow`, `warn`, or `block`
+- whether any Skill requests permissions beyond its declared task
+- whether any Skill has dangerous source-to-network data flow
+- whether any Skill should get a policy overlay before use
+- whether any Skill should be optimized for harness structure, token efficiency, or taxonomy clarity
+
+Do not automatically modify, rename, or remediate real local Skills. For local Skills, generate reports, overlays, optimized drafts, and approval plans only. Apply edits only after the user explicitly approves a concrete plan.
+
+After a local portfolio audit, summarize the result in plain language: counts, top risks, blocked Skills, recommended remediation order, and where the generated report lives.
 
 ## Inputs
 

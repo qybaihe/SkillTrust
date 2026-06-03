@@ -141,7 +141,19 @@ skilltrust analyze fixtures/overprivileged-research-skill
 
 ### Install As A Local Codex Skill
 
-If you want the host Agent to discover SkillTrust as a local Skill, clone it into your Codex skills directory:
+#### One-Prompt Agent Install
+
+Paste this prompt into Codex or another local coding Agent:
+
+```text
+Install SkillTrust as a local Codex Skill from https://github.com/qybaihe/SkillTrust. Clone or update it at ~/.codex/skills/skilltrust, install the CLI with python -m pip install -e ., verify both skilltrust --help and python -m skilltrust --help, then run a read-only local Skill portfolio audit with skilltrust audit-local --skills-root ~/.codex/skills --out ~/.codex/skills/skilltrust/reports/local-all. Do not modify, rename, or remediate any existing local Skill automatically; only generate reports, policy overlays, and approval plans. After the audit, summarize allow/warn/block counts, dangerous or overprivileged findings, and the next safest remediation steps.
+```
+
+This gives the host Agent a complete setup goal: install SkillTrust, verify the command, audit the local Skill ecosystem, and keep all real Skills unchanged unless the user explicitly approves follow-up edits.
+
+#### Manual Install
+
+If you want to install it yourself, clone it into your Codex skills directory:
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -150,7 +162,13 @@ cd ~/.codex/skills/skilltrust
 python -m pip install -e .
 ```
 
-Then ask your Agent to use `SkillTrust` to audit a Skill package. The root `SKILL.md` explains the workflow.
+Then ask your Agent:
+
+```text
+Use SkillTrust to run a read-only audit of my local Codex Skills and tell me which ones are overprivileged, dangerous, or worth optimizing.
+```
+
+The root `SKILL.md` explains the workflow the Agent should follow after SkillTrust is loaded.
 
 ## Quick Start
 
