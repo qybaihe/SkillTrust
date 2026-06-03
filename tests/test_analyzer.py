@@ -192,8 +192,11 @@ def test_semantic_review_request_is_generated(tmp_path: Path) -> None:
     assert request["deterministic_findings"]
     assert request["agent_questions"]
     assert request["agent_review_protocol"]
+    assert request["deterministic_evidence_role"]["role"] == "evidence_pack_not_final_judge"
+    assert "judgment_rule" in request["dynamic_semantic_judgment_rules"]
     assert {item["path"] for item in request["core_documents_to_read"]} >= {"SKILL.md", "README.md"}
     assert request["output_schema"]["full_document_reading"]["required"] is True
+    assert request["output_schema"]["dynamic_authoring_assessment"]
     assert request["privacy_boundary"]["external_model_api"] is False
     assert request["privacy_boundary"]["api_key_required"] is False
 

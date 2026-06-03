@@ -42,11 +42,48 @@ def build_review_request(analysis: Dict[str, Any]) -> Dict[str, Any]:
         "target_path": analysis["input_path"],
         "rules_version": analysis.get("rules_version", RULES_VERSION),
         "agent_review_protocol": [
-            "First read each core document in `core_documents_to_read` end-to-end before judging individual findings.",
-            "Summarize the declared task boundary from the full documents, not only from finding snippets.",
+            "First read each core document in `core_documents_to_read` end-to-end before judging individual findings or score.",
+            "Treat deterministic findings as evidence leads with line numbers and hashes, not as the final semantic judgment.",
+            "Summarize the declared task boundary from the full documents, not only from finding snippets or keyword matches.",
             "Then reconcile every deterministic finding against that task boundary and the generated least-privilege policy.",
+            "Dynamically assess whether the package is under-specified, over-specified, too long, too short, or should split references; do not rely on fixed thresholds alone.",
             "Record the documents read in `full_document_reading.documents_read` in semantic_review.json.",
         ],
+        "deterministic_evidence_role": {
+            "role": "evidence_pack_not_final_judge",
+            "use_for": [
+                "line-numbered evidence",
+                "hash-backed reproducibility",
+                "permission surface discovery",
+                "sensitive data-flow leads",
+                "initial policy draft",
+            ],
+            "limitations": [
+                "keyword or pattern matches can overstate risk without intent context",
+                "length and token thresholds are triage signals, not final quality judgments",
+                "only host-Agent full-document reading can decide necessity against declared intent",
+            ],
+        },
+        "dynamic_semantic_judgment_rules": {
+            "too_short_signals": [
+                "unclear trigger purpose",
+                "missing input or output contract",
+                "missing permission boundary",
+                "missing safety or consent assumptions",
+                "insufficient workflow detail for reliable activation",
+            ],
+            "too_long_signals": [
+                "large examples or style libraries loaded at activation",
+                "schemas or validators embedded as prose",
+                "repeated deterministic command sequences",
+                "troubleshooting trees or reference material that should be deferred",
+                "workflow variants that should live in references",
+            ],
+            "judgment_rule": (
+                "Long is not automatically bad and short is not automatically good. Judge whether the Agent can "
+                "activate, understand, and safely constrain the package without loading irrelevant context."
+            ),
+        },
         "core_documents_to_read": core_documents,
         "declared_intent": analysis.get("declared_intent", {}),
         "required_permissions": analysis.get("required_permissions", {}),
@@ -70,10 +107,10 @@ def build_review_request(analysis: Dict[str, Any]) -> Dict[str, Any]:
         },
         "agent_questions": [
             "After reading the full core documents, what is the Skill's declared task boundary?",
-            "What is the Skill's declared task boundary?",
             "Which permissions are task-critical, optional, or unjustified?",
             "For each deterministic finding, is the behavior necessary, acceptable with policy, overreach, likely false positive, or needs human review?",
             "Are any required permissions missing from the declared Skill boundary?",
+            "Is the package under-specified, over-specified, too long, too short, or in need of reference splitting?",
             "What policy refinements would make the Skill installable with least privilege?",
             "What install recommendation should the semantic reviewer give: allow, warn, or block?",
             "Should the base score receive a small semantic overlay adjustment between -10 and +10, and why?",
@@ -98,6 +135,9 @@ def render_review_instructions(request: Dict[str, Any]) -> str:
         "Before assessing individual findings, read every core document below end-to-end. Use this first pass to understand the Skill's declared task, workflow, boundaries, inputs, and outputs.\n\n"
         f"{doc_lines}\n\n"
         "Record this reading pass in `full_document_reading.documents_read` inside `semantic_review.json`.\n\n"
+        "## Deterministic Evidence Role\n\n"
+        "The deterministic scanner is an evidence pack, not the final semantic judge. Use its line numbers, hashes, and permission leads to focus review, but decide necessity only after understanding the full declared task boundary.\n\n"
+        "Length, token, keyword, path, and dependency matches are triage signals. They can indicate risk, but they do not replace full-document understanding.\n\n"
         "## Review Boundary\n\n"
         "- Read `semantic_review_request.json`.\n"
         "- Read the full core documents listed above before using finding snippets.\n"
@@ -118,6 +158,11 @@ def render_review_instructions(request: Dict[str, Any]) -> str:
         "- Recommend policy refinements.\n"
         "- Recommend install action: `allow`, `warn`, or `block`.\n"
         "- Suggest score overlay in the range -10 to +10.\n\n"
+        "## Dynamic Authoring And Permission Calibration\n\n"
+        "- Decide whether the package is too short, too long, under-specified, over-specified, or should split references.\n"
+        "- Do not use a fixed length threshold as the final answer.\n"
+        "- Judge whether the Agent can activate the package accurately, understand boundaries, and avoid loading irrelevant context.\n"
+        "- For each permission, ask whether the declared task truly needs it, whether it can be narrowed, and whether user confirmation should be required.\n\n"
         "## Conservative Rules\n\n"
         "- Never remove deterministic evidence.\n"
         "- Do not turn critical data-flow evidence into allow.\n"
@@ -137,6 +182,11 @@ def semantic_review_schema_template(
         "reviewer": "host-agent",
         "review_mode": "agent-in-the-loop",
         "target_path": target_path,
+        "deterministic_evidence_interpretation": {
+            "role": "evidence_pack_not_final_judge",
+            "how_used": "",
+            "limitations_considered": [],
+        },
         "full_document_reading": {
             "required": True,
             "documents_read": [
@@ -158,6 +208,17 @@ def semantic_review_schema_template(
             "requires_user_confirmation": [],
         },
         "task_critical_permissions": [],
+        "dynamic_authoring_assessment": {
+            "too_short": False,
+            "too_short_reason": "",
+            "too_long": False,
+            "too_long_reason": "",
+            "under_specified": False,
+            "over_specified": False,
+            "reference_split_recommended": False,
+            "script_or_config_extraction_recommended": False,
+            "rationale": "",
+        },
         "finding_assessments": [
             {
                 "finding_id": finding["id"],
@@ -286,6 +347,14 @@ def draft_semantic_review(request_path: str | Path, out_path: str | Path) -> Dic
         "reviewer": "host-agent-demo-draft",
         "review_mode": "offline-draft-for-fusion-testing",
         "target_path": request["target_path"],
+        "deterministic_evidence_interpretation": {
+            "role": "evidence_pack_not_final_judge",
+            "how_used": "Offline draft uses deterministic evidence as triage leads only.",
+            "limitations_considered": [
+                "A real host-Agent review must read full core documents before final semantic judgment.",
+                "Length and keyword matches are not final authoring or permission decisions.",
+            ],
+        },
         "full_document_reading": {
             "required": True,
             "documents_read": [
@@ -313,6 +382,17 @@ def draft_semantic_review(request_path: str | Path, out_path: str | Path) -> Dic
             "requires_user_confirmation": ["New network destinations", "file uploads", "access to personal profile paths"],
         },
         "task_critical_permissions": [],
+        "dynamic_authoring_assessment": {
+            "too_short": False,
+            "too_short_reason": "",
+            "too_long": False,
+            "too_long_reason": "",
+            "under_specified": False,
+            "over_specified": bool(findings),
+            "reference_split_recommended": False,
+            "script_or_config_extraction_recommended": False,
+            "rationale": "Offline draft does not perform full dynamic authoring review; host-Agent review should assess this after reading core documents.",
+        },
         "finding_assessments": assessments,
         "missing_permission_declarations": [],
         "policy_refinements": [
