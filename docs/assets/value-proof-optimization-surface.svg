@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="640" viewBox="0 0 1100 640" role="img">
+<style>
+  .title { font: 700 26px Georgia, serif; fill: #17212b; }
+  .sub { font: 500 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .label { font: 650 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .small { font: 500 12px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .num { font: 800 28px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .card { fill: #fffaf0; stroke: #263238; stroke-width: 1.4; rx: 14; }
+  .axis { stroke: #c7d0d9; stroke-width: 1; }
+</style>
+<rect width="100%" height="100%" fill="#fbf7ef"/>
+<text x="42" y="54" class="title">Optimization Surface Found Across Popular Skills</text>
+<text x="42" y="82" class="sub">The same audit pass produced governance, authoring, token, taxonomy, and install-time improvement signals.</text>
+<text x="60" y="158" class="label">Authoring findings</text>
+<rect x="330" y="135" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="135" width="565.2941176470588" height="34" fill="#4c6ef5" rx="10"/>
+<text x="907.2941176470588" y="158" class="label">31</text>
+<text x="60" y="220" class="label">Scriptification candidates</text>
+<rect x="330" y="197" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="197" width="474.11764705882354" height="34" fill="#12b886" rx="10"/>
+<text x="816.1176470588235" y="220" class="label">26</text>
+<text x="60" y="282" class="label">Reference extraction candidates</text>
+<rect x="330" y="259" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="259" width="310.0" height="34" fill="#f59f00" rx="10"/>
+<text x="652.0" y="282" class="label">17</text>
+<text x="60" y="344" class="label">Taxonomy findings</text>
+<rect x="330" y="321" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="321" width="164.11764705882354" height="34" fill="#845ef7" rx="10"/>
+<text x="506.11764705882354" y="344" class="label">9</text>
+<text x="60" y="406" class="label">Approval-plan items</text>
+<rect x="330" y="383" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="383" width="127.6470588235294" height="34" fill="#15aabf" rx="10"/>
+<text x="469.6470588235294" y="406" class="label">7</text>
+<text x="60" y="468" class="label">Install-time warn decisions</text>
+<rect x="330" y="445" width="620" height="34" fill="#edf2f7" rx="10"/>
+<rect x="330" y="445" width="72.94117647058823" height="34" fill="#fa5252" rx="10"/>
+<text x="414.94117647058823" y="468" class="label">4</text>
+<rect x="60" y="530" width="880" height="58" fill="#fffaf0" stroke="#263238" stroke-width="1.1" rx="16"/>
+<text x="84" y="565" class="small">Interpretation: allow does not mean no work remains. SkillTrust turns install review into a plan for safer, leaner, more precise packages.</text>
+</svg>

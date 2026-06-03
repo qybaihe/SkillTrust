@@ -65,6 +65,24 @@ The benchmark found no broad malicious pattern in the sampled packages. Its stro
 
 See [Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md).
 
+## Value Proof: Allow Is Not The Finish Line
+
+SkillTrust also generated optimization plans for the same public sample. The goal is not only to say whether a package is installable, but to make it slimmer, more intent-bound, and easier for an Agent to select precisely:
+
+- 20 / 28 packages had token-saving opportunities.
+- Estimated activation-token reduction: 30,699 -> 23,867 tokens.
+- Estimated tokens saved: 6,832, about 22.3%.
+- 26 scriptification candidates and 17 reference extraction candidates were found.
+- 9 taxonomy findings and 7 approval-plan items were generated.
+
+![SkillTrust governance coverage](docs/assets/value-proof-governance.svg)
+
+![SkillTrust token reduction](docs/assets/value-proof-token-reduction.svg)
+
+![SkillTrust optimization surface](docs/assets/value-proof-optimization-surface.svg)
+
+See [SkillTrust Value Proof](docs/benchmarks/value-proof.md).
+
 ## Install
 
 ### Universal One-Prompt Agent Install

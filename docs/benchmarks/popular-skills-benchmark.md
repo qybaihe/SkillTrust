@@ -71,6 +71,8 @@ Most sampled packages were not malicious and did not produce install-time blocke
 
 This supports SkillTrust's positioning as a trust and permission governance layer, not merely a malware scanner.
 
+For before/after optimization metrics and charts, see [SkillTrust Value Proof](value-proof.md).
+
 ### 2. Deterministic Evidence Alone Is Not Enough
 
 Several samples demonstrate why host-Agent semantic review is necessary.

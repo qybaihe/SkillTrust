@@ -65,6 +65,24 @@ SkillTrust 已对 28 个来自热门公开 AI Skill、Claude Skill、Cursor rule
 
 查看报告：[Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchmark.md)。
 
+## Value Proof：Allow 不是终点
+
+SkillTrust 也为同一批公开样本生成了优化计划。重点不是只判断能不能安装，而是把 package 变得更精简、更受意图约束，也更容易被 Agent 精准选择：
+
+- 20 / 28 个 package 有 token-saving 机会。
+- 预计 activation-token reduction：30,699 -> 23,867 tokens。
+- 预计节省 6,832 tokens，约 22.3%。
+- 发现 26 个 scriptification candidates 和 17 个 reference extraction candidates。
+- 生成 9 个 taxonomy findings 和 7 个 approval-plan items。
+
+![SkillTrust governance coverage](docs/assets/value-proof-governance.svg)
+
+![SkillTrust token reduction](docs/assets/value-proof-token-reduction.svg)
+
+![SkillTrust optimization surface](docs/assets/value-proof-optimization-surface.svg)
+
+查看报告：[SkillTrust Value Proof](docs/benchmarks/value-proof.md)。
+
 ## 安装
 
 ### 通用一句话交给 AI Agent 安装

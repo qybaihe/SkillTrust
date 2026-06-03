@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" role="img">
+<style>
+  .title { font: 700 26px Georgia, serif; fill: #17212b; }
+  .sub { font: 500 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .label { font: 650 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .small { font: 500 12px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .num { font: 800 28px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .card { fill: #fffaf0; stroke: #263238; stroke-width: 1.4; rx: 14; }
+  .axis { stroke: #c7d0d9; stroke-width: 1; }
+</style>
+<rect width="100%" height="100%" fill="#fbf7ef"/>
+<text x="42" y="54" class="title">SkillTrust Value Proof: 28 Public Packages</text>
+<text x="42" y="82" class="sub">Install decisions plus optimization coverage from popular AI Skill, Cursor rule, and Agent instruction samples.</text>
+<text x="70" y="130" class="label">Install gate outcomes</text>
+<rect x="70" y="150" width="617.1428571428571" height="46" fill="#2f9e44" rx="10"/>
+<rect x="687.1428571428571" y="150" width="102.85714285714286" height="46" fill="#f59f00" rx="10"/>
+<rect x="70" y="150" width="720" height="46" fill="none" stroke="#17212b" stroke-width="1.5" rx="10"/>
+<text x="333.57142857142856" y="180" class="label" fill="#ffffff">24 allow</text>
+<text x="704.5714285714286" y="180" class="label">4 warn</text>
+<text x="806" y="179" class="small">0 block</text>
+<rect x="70" y="260" width="340" height="92" fill="#e7f5ff" stroke="#263238" stroke-width="1.2" rx="16"/>
+<text x="94" y="302" class="num">20 / 28</text>
+<text x="94" y="328" class="small">token-saving opportunities</text>
+<rect x="460" y="260" width="340" height="92" fill="#fff4e6" stroke="#263238" stroke-width="1.2" rx="16"/>
+<text x="484" y="302" class="num">17</text>
+<text x="484" y="328" class="small">reference extraction candidates</text>
+<rect x="70" y="390" width="340" height="92" fill="#ebfbee" stroke="#263238" stroke-width="1.2" rx="16"/>
+<text x="94" y="432" class="num">26</text>
+<text x="94" y="458" class="small">scriptification candidates</text>
+<rect x="460" y="390" width="340" height="92" fill="#f8f0fc" stroke="#263238" stroke-width="1.2" rx="16"/>
+<text x="484" y="432" class="num">9</text>
+<text x="484" y="458" class="small">taxonomy findings</text>
+<rect x="830" y="130" width="250" height="352" fill="#17212b" rx="20"/>
+<text x="855" y="174" style="font:800 22px ui-sans-serif,system-ui; fill:#fffaf0">Key read</text>
+<text x="855" y="214" style="font:600 16px ui-sans-serif,system-ui; fill:#d8dee9">Most popular samples</text>
+<text x="855" y="244" style="font:600 16px ui-sans-serif,system-ui; fill:#d8dee9">were installable, but</text>
+<text x="855" y="274" style="font:600 16px ui-sans-serif,system-ui; fill:#d8dee9">SkillTrust still found</text>
+<text x="855" y="304" style="font:600 16px ui-sans-serif,system-ui; fill:#d8dee9">token, policy, authoring,</text>
+<text x="855" y="334" style="font:600 16px ui-sans-serif,system-ui; fill:#d8dee9">and taxonomy upgrades.</text>
+</svg>
