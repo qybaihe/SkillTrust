@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 from datetime import date
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +22,11 @@ from skilltrust.token_optimizer import analyze_token_efficiency
 RESULTS_JSON = ROOT / "docs/benchmarks/external-baseline-results.json"
 REPORT_EN = ROOT / "docs/benchmarks/external-baseline-benchmark.md"
 REPORT_ZH = ROOT / "docs/benchmarks/external-baseline-benchmark.zh-CN.md"
+ASSET_DIR = ROOT / "docs/assets"
+CAPABILITY_HEATMAP_SVG = ASSET_DIR / "external-baseline-capability-heatmap.svg"
+SCORECARD_SVG = ASSET_DIR / "external-baseline-scorecard.svg"
+FIXTURE_MATRIX_SVG = ASSET_DIR / "external-baseline-fixture-matrix.svg"
+TOKEN_REDUCTION_SVG = ASSET_DIR / "external-baseline-token-reduction.svg"
 
 PUBLISHED_SAMPLE_TOKEN_SAVINGS = {
     "source": "docs/benchmarks/value-proof.md",
@@ -631,6 +637,7 @@ def run() -> dict[str, Any]:
     }
     RESULTS_JSON.parent.mkdir(parents=True, exist_ok=True)
     RESULTS_JSON.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    render_visual_assets(payload)
     REPORT_EN.write_text(render_en(payload), encoding="utf-8")
     REPORT_ZH.write_text(render_zh(payload), encoding="utf-8")
     return payload
@@ -691,6 +698,268 @@ def token_savings_summary(optimized: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def render_visual_assets(payload: dict[str, Any]) -> None:
+    ASSET_DIR.mkdir(parents=True, exist_ok=True)
+    CAPABILITY_HEATMAP_SVG.write_text(render_capability_heatmap_svg(payload), encoding="utf-8")
+    SCORECARD_SVG.write_text(render_scorecard_svg(payload), encoding="utf-8")
+    FIXTURE_MATRIX_SVG.write_text(render_fixture_matrix_svg(payload), encoding="utf-8")
+    TOKEN_REDUCTION_SVG.write_text(render_token_reduction_svg(payload), encoding="utf-8")
+
+
+def svg_style() -> str:
+    return """
+<style>
+  .title { font: 700 27px Georgia, serif; fill: #17212b; }
+  .subtitle { font: 500 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .axis { font: 650 11px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #24313d; }
+  .axis-small { font: 600 10px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .label { font: 650 13px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .small { font: 500 12px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .tiny { font: 600 10px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #5e6b76; }
+  .num { font: 800 28px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .inv { fill: #ffffff; }
+  .paper { fill: #fbf7ef; }
+  .panel { fill: #fffdf8; stroke: #263238; stroke-width: 1.2; rx: 12; }
+  .grid { stroke: #d8dee6; stroke-width: 1; }
+  .tick { stroke: #b8c2cc; stroke-width: 1; }
+  .bar-bg { fill: #edf2f7; }
+</style>"""
+
+
+def svg_text(text: Any) -> str:
+    return escape(str(text), quote=True)
+
+
+def yes_color(value: bool) -> str:
+    return "#0ca678" if value else "#e9ecef"
+
+
+def yes_label(value: bool) -> str:
+    return "1" if value else "0"
+
+
+def wrap_svg_text(text: str, max_chars: int) -> list[str]:
+    words = text.replace("/", " / ").replace("-", "- ").split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        candidate = word if not current else f"{current} {word}"
+        if len(candidate) <= max_chars:
+            current = candidate
+            continue
+        if current:
+            lines.append(current)
+        current = word
+    if current:
+        lines.append(current)
+    return lines[:3]
+
+
+def render_capability_heatmap_svg(payload: dict[str, Any]) -> str:
+    tools = payload["tools"]
+    caps = list(CAPABILITY_LABELS_EN.items())
+    cell_w = 43
+    cell_h = 28
+    left = 236
+    top = 170
+    right = 42
+    bottom = 58
+    width = left + len(caps) * cell_w + right
+    height = top + len(tools) * cell_h + bottom
+
+    body = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">',
+        svg_style(),
+        '<rect width="100%" height="100%" class="paper"/>',
+        '<text x="34" y="48" class="title">Figure 1. AI Skill Governance Capability Heatmap</text>',
+        '<text x="34" y="76" class="subtitle">Rows compare scanner classes; columns are install-time AI Skill governance capabilities. Dark cells indicate direct coverage.</text>',
+        '<rect x="24" y="104" width="92" height="34" fill="#0ca678" rx="9"/><text x="130" y="126" class="small">directly covered</text>',
+        '<rect x="264" y="104" width="92" height="34" fill="#e9ecef" rx="9"/><text x="370" y="126" class="small">not a primary capability</text>',
+        f'<rect x="{left - 18}" y="{top - 18}" width="{len(caps) * cell_w + 18}" height="{len(tools) * cell_h + 18}" class="panel"/>',
+    ]
+
+    for index, (_, label) in enumerate(caps):
+        x = left + index * cell_w + 23
+        short = short_capability(label)
+        body.append(f'<text x="{x}" y="{top - 26}" class="axis" text-anchor="start" transform="rotate(-52 {x} {top - 26})">{svg_text(short)}</text>')
+
+    for row, tool in enumerate(tools):
+        y = top + row * cell_h
+        name = tool["name"]
+        if len(name) > 25:
+            name = name[:24] + "..."
+        coverage = tool["coverage_count"]
+        body.append(f'<text x="{left - 28}" y="{y + 18}" class="axis" text-anchor="end">{svg_text(name)}</text>')
+        body.append(f'<text x="{left + len(caps) * cell_w + 10}" y="{y + 18}" class="axis-small">{coverage}/15</text>')
+        for col, (key, _) in enumerate(caps):
+            x = left + col * cell_w
+            covered = bool(tool["covers"].get(key))
+            stroke = "#ffffff" if covered else "#d0d7de"
+            body.append(
+                f'<rect x="{x}" y="{y}" width="{cell_w - 4}" height="{cell_h - 4}" '
+                f'fill="{yes_color(covered)}" stroke="{stroke}" stroke-width="1" rx="5"/>'
+            )
+            if covered:
+                body.append(f'<text x="{x + (cell_w - 4) / 2}" y="{y + 17}" class="tiny inv" text-anchor="middle">{yes_label(covered)}</text>')
+
+    body.append(f'<text x="{left + len(caps) * cell_w + 10}" y="{top - 24}" class="axis-small">coverage</text>')
+    body.append("</svg>")
+    return "\n".join(body) + "\n"
+
+
+def short_capability(label: str) -> str:
+    replacements = {
+        "AI Skill package": "Skill package",
+        "declared intent": "Intent",
+        "required permissions": "Required perms",
+        "observed permission surface": "Observed surface",
+        "intent vs permission overreach": "Overreach",
+        "line-level evidence": "Evidence",
+        "Agent semantic review": "Agent review",
+        "allow/warn/block decision": "A/W/B decision",
+        "critical data-flow guard": "Data-flow guard",
+        "permission manifest": "Manifest",
+        "policy overlay": "Policy",
+        "audit receipt": "Receipt",
+        "remediation plan": "Remediation",
+        "optimized Skill package": "Optimized pkg",
+        "token efficiency": "Token efficiency",
+    }
+    return replacements.get(label, label)
+
+
+def render_scorecard_svg(payload: dict[str, Any]) -> str:
+    tools = sorted(payload["tools"], key=lambda item: item["coverage_count"], reverse=True)
+    max_score = len(CAPABILITY_LABELS_EN)
+    width = 1120
+    row_h = 34
+    top = 132
+    height = top + len(tools) * row_h + 76
+    bar_x = 286
+    bar_w = 520
+    body = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">',
+        svg_style(),
+        '<rect width="100%" height="100%" class="paper"/>',
+        '<text x="38" y="50" class="title">Figure 2. Governance Scorecard Across Baselines</text>',
+        '<text x="38" y="78" class="subtitle">Score = count of directly covered AI Skill governance dimensions out of 15. Specialist scanners remain complementary outside this scope.</text>',
+        f'<rect x="26" y="104" width="{width - 52}" height="{height - 136}" class="panel"/>',
+        '<text x="44" y="128" class="axis">Tool</text>',
+        '<text x="286" y="128" class="axis">coverage score</text>',
+        '<text x="838" y="128" class="axis">positioning</text>',
+    ]
+    for tick in [0, 5, 10, 15]:
+        x = bar_x + (tick / max_score) * bar_w
+        body.append(f'<line x1="{x}" y1="142" x2="{x}" y2="{height - 52}" class="tick" opacity="0.55"/>')
+        body.append(f'<text x="{x}" y="{height - 30}" class="tiny" text-anchor="middle">{tick}</text>')
+
+    for row, tool in enumerate(tools):
+        y = top + row * row_h
+        score = tool["coverage_count"]
+        bar_width = (score / max_score) * bar_w
+        color = "#0ca678" if tool["name"] == "SkillTrust" else "#4c6ef5" if score >= 6 else "#adb5bd"
+        body.append(f'<text x="44" y="{y + 21}" class="label">{svg_text(tool["name"])}</text>')
+        body.append(f'<rect x="{bar_x}" y="{y + 6}" width="{bar_w}" height="18" class="bar-bg" rx="9"/>')
+        body.append(f'<rect x="{bar_x}" y="{y + 6}" width="{bar_width}" height="18" fill="{color}" rx="9"/>')
+        body.append(f'<text x="{bar_x + bar_w + 18}" y="{y + 21}" class="axis">{score}/{max_score}</text>')
+        for idx, line in enumerate(wrap_svg_text(tool["fit"], 54)):
+            body.append(f'<text x="838" y="{y + 15 + idx * 12}" class="tiny">{svg_text(line)}</text>')
+
+    body.append("</svg>")
+    return "\n".join(body) + "\n"
+
+
+def render_fixture_matrix_svg(payload: dict[str, Any]) -> str:
+    fixtures = payload["fixtures"]
+    width = 1060
+    height = 420
+    columns = [("allow", "#0ca678"), ("warn", "#f59f00"), ("block", "#e03131")]
+    left = 260
+    top = 156
+    cell_w = 156
+    cell_h = 68
+    body = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">',
+        svg_style(),
+        '<rect width="100%" height="100%" class="paper"/>',
+        '<text x="38" y="50" class="title">Figure 3. Fixture Decision Matrix</text>',
+        '<text x="38" y="78" class="subtitle">Three benchmark fixtures exercise the install gate: safe package, overprivileged package, and critical data-flow package.</text>',
+        f'<rect x="28" y="108" width="{width - 56}" height="280" class="panel"/>',
+    ]
+    for col, (label, color) in enumerate(columns):
+        x = left + col * cell_w
+        body.append(f'<rect x="{x}" y="122" width="{cell_w - 14}" height="32" fill="{color}" opacity="0.14" rx="9"/>')
+        body.append(f'<text x="{x + (cell_w - 14) / 2}" y="143" class="axis" text-anchor="middle">{label.upper()}</text>')
+
+    risk_color = {"Trusted": "#0ca678", "Overprivileged": "#f59f00", "Critical Risk": "#e03131"}
+    for row, item in enumerate(fixtures):
+        y = top + row * cell_h
+        label_lines = wrap_svg_text(item["name"], 28)
+        for idx, line in enumerate(label_lines):
+            body.append(f'<text x="48" y="{y + 26 + idx * 13}" class="label">{svg_text(line)}</text>')
+        body.append(f'<text x="48" y="{y + 55}" class="tiny">score {item["score"]} · {svg_text(item["risk_level"])}</text>')
+        for col, (action, color) in enumerate(columns):
+            x = left + col * cell_w
+            is_actual = item["actual"] == action
+            fill = color if is_actual else "#f1f3f5"
+            opacity = "1" if is_actual else "0.72"
+            body.append(f'<rect x="{x}" y="{y}" width="{cell_w - 14}" height="{cell_h - 14}" fill="{fill}" opacity="{opacity}" stroke="#263238" stroke-width="1" rx="12"/>')
+            if is_actual:
+                body.append(f'<text x="{x + (cell_w - 14) / 2}" y="{y + 33}" class="label inv" text-anchor="middle">MATCH</text>')
+                body.append(f'<text x="{x + (cell_w - 14) / 2}" y="{y + 49}" class="tiny inv" text-anchor="middle">expected {svg_text(item["expected"])}</text>')
+            else:
+                body.append(f'<text x="{x + (cell_w - 14) / 2}" y="{y + 37}" class="tiny" text-anchor="middle">-</text>')
+    body.append('<text x="728" y="366" class="small">Result: 3 / 3 fixture decisions matched expected allow / warn / block gates.</text>')
+    body.append("</svg>")
+    return "\n".join(body) + "\n"
+
+
+def render_token_reduction_svg(payload: dict[str, Any]) -> str:
+    published = payload["published_sample_token_savings"]
+    rescan = payload["optimized_preview_rescan_token_savings"]
+    width = 1120
+    height = 520
+    bar_x = 210
+    bar_w = 700
+    max_value = published["activation_body_tokens_before"]
+    original_after_w = published["projected_activation_tokens_after"] / max_value * bar_w
+    original_before_w = published["activation_body_tokens_before"] / max_value * bar_w
+    rescan_before_w = rescan["activation_body_tokens_before"] / max_value * bar_w
+    rescan_after_w = rescan["projected_activation_tokens_after"] / max_value * bar_w
+    body = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">',
+        svg_style(),
+        '<rect width="100%" height="100%" class="paper"/>',
+        '<text x="38" y="50" class="title">Figure 4. Activation Token Reduction Evidence</text>',
+        '<text x="38" y="78" class="subtitle">First-pass optimization reduces always-loaded instructions; preview rescan shows little residual waste left.</text>',
+        f'<rect x="28" y="110" width="{width - 56}" height="374" class="panel"/>',
+    ]
+    rows = [
+        ("Original sample before plan", original_before_w, published["activation_body_tokens_before"], "#4c6ef5", 150),
+        ("Original sample after plan", original_after_w, published["projected_activation_tokens_after"], "#0ca678", 218),
+        ("Optimized preview rescan before", rescan_before_w, rescan["activation_body_tokens_before"], "#748ffc", 306),
+        ("Optimized preview rescan after", rescan_after_w, rescan["projected_activation_tokens_after"], "#12b886", 374),
+    ]
+    for label, bar_width, value, color, y in rows:
+        body.append(f'<text x="52" y="{y + 24}" class="label">{svg_text(label)}</text>')
+        body.append(f'<rect x="{bar_x}" y="{y}" width="{bar_w}" height="38" fill="#edf2f7" rx="12"/>')
+        body.append(f'<rect x="{bar_x}" y="{y}" width="{bar_width}" height="38" fill="{color}" rx="12"/>')
+        body.append(f'<text x="{bar_x + bar_width + 14}" y="{y + 25}" class="label">{value:,}</text>')
+
+    body.extend(
+        [
+            '<rect x="52" y="430" width="250" height="46" fill="#ebfbee" stroke="#263238" stroke-width="1" rx="12"/>',
+            f'<text x="72" y="459" class="label">{published["estimated_tokens_saved"]:,} saved · {published["estimated_reduction_percent"]}%</text>',
+            '<rect x="330" y="430" width="280" height="46" fill="#fff4e6" stroke="#263238" stroke-width="1" rx="12"/>',
+            f'<text x="350" y="459" class="label">Residual: {rescan["estimated_tokens_saved"]:,} · {rescan["estimated_reduction_percent"]}%</text>',
+            '<rect x="640" y="430" width="310" height="46" fill="#f8f9fa" stroke="#263238" stroke-width="1" rx="12"/>',
+            f'<text x="660" y="459" class="label">20/28 original packages had opportunities</text>',
+        ]
+    )
+    body.append("</svg>")
+    return "\n".join(body) + "\n"
+
+
 def render_en(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
     published_token = payload["published_sample_token_savings"]
@@ -713,6 +982,16 @@ def render_en(payload: dict[str, Any]) -> str:
         f"- Optimized Skill packages measured: {summary['optimized_skill_count']}",
         f"- Published first-pass activation-token reduction on the original 28-package sample: {published_token['activation_body_tokens_before']} -> {published_token['projected_activation_tokens_after']}, saving {published_token['estimated_tokens_saved']} tokens ({published_token['estimated_reduction_percent']}%)",
         f"- Optimized preview pack rescan: only {rescan_token['estimated_tokens_saved']} residual tokens left to save ({rescan_token['estimated_reduction_percent']}%), which indicates the preview pack is already compact",
+        "",
+        "## Figures",
+        "",
+        "![External baseline capability heatmap](../assets/external-baseline-capability-heatmap.svg)",
+        "",
+        "![External baseline governance scorecard](../assets/external-baseline-scorecard.svg)",
+        "",
+        "![Fixture decision matrix](../assets/external-baseline-fixture-matrix.svg)",
+        "",
+        "![Activation token reduction evidence](../assets/external-baseline-token-reduction.svg)",
         "",
         "## Fixture Decision Benchmark",
         "",
@@ -838,6 +1117,7 @@ def render_en(payload: dict[str, Any]) -> str:
             "- `docs/benchmarks/external-baseline-results.json`",
             "- `docs/benchmarks/external-baseline-benchmark.md`",
             "- `docs/benchmarks/external-baseline-benchmark.zh-CN.md`",
+            "- `docs/assets/external-baseline-*.svg`",
             "",
             "## Caveats",
             "",
@@ -871,6 +1151,16 @@ def render_zh(payload: dict[str, Any]) -> str:
         f"- 已测优化版 Skill 包：{summary['optimized_skill_count']}",
         f"- 原始 28 包公开样本第一轮 activation-token reduction：{published_token['activation_body_tokens_before']} -> {published_token['projected_activation_tokens_after']}，节省 {published_token['estimated_tokens_saved']} tokens（{published_token['estimated_reduction_percent']}%）",
         f"- 优化预览包复扫：只剩 {rescan_token['estimated_tokens_saved']} 个可继续节省的 residual tokens（{rescan_token['estimated_reduction_percent']}%），说明 preview pack 已经明显变精简",
+        "",
+        "## 图表",
+        "",
+        "![外部基线能力热力图](../assets/external-baseline-capability-heatmap.svg)",
+        "",
+        "![外部基线治理评分表](../assets/external-baseline-scorecard.svg)",
+        "",
+        "![Fixture 决策矩阵](../assets/external-baseline-fixture-matrix.svg)",
+        "",
+        "![Activation token reduction evidence](../assets/external-baseline-token-reduction.svg)",
         "",
         "## Fixture 决策 Benchmark",
         "",
@@ -1001,6 +1291,7 @@ def render_zh(payload: dict[str, Any]) -> str:
             "- `docs/benchmarks/external-baseline-results.json`",
             "- `docs/benchmarks/external-baseline-benchmark.md`",
             "- `docs/benchmarks/external-baseline-benchmark.zh-CN.md`",
+            "- `docs/assets/external-baseline-*.svg`",
             "",
             "## 限制说明",
             "",

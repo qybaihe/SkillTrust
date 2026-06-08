@@ -79,6 +79,10 @@ SkillTrust 也和 17 个主流安全、供应链、LLM guardrail / eval baseline
 - 在原始 28 包公开样本上，SkillTrust 第一轮优化计划预计将 activation-body tokens 从 30,699 降到 23,867，节省 6,832 tokens，约 22.3%。
 - 对 28 个优化版 preview packages 再扫描后，只剩 250 个 residual tokens 可继续节省，约 1.5%，可作为优化包已经变精简的回归检查。
 
+![SkillTrust 外部基线能力热力图](docs/assets/external-baseline-capability-heatmap.svg)
+
+![SkillTrust activation token reduction evidence](docs/assets/external-baseline-token-reduction.svg)
+
 查看报告：[外部基线 Benchmark](docs/benchmarks/external-baseline-benchmark.zh-CN.md)。英文版：[External Baseline Benchmark](docs/benchmarks/external-baseline-benchmark.md)。
 
 复现命令：

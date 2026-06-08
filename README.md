@@ -79,6 +79,10 @@ The result is intentionally framed as complementary rather than winner-takes-all
 - On the original 28-package public sample, SkillTrust's first-pass optimization plan estimates 30,699 -> 23,867 activation-body tokens, saving 6,832 tokens, about 22.3%.
 - Re-scanning the 28 optimized preview packages leaves only 250 residual tokens to save, about 1.5%, which acts as a compactness regression check.
 
+![SkillTrust external baseline capability heatmap](docs/assets/external-baseline-capability-heatmap.svg)
+
+![SkillTrust activation token reduction evidence](docs/assets/external-baseline-token-reduction.svg)
+
 See [External Baseline Benchmark](docs/benchmarks/external-baseline-benchmark.md). Chinese version: [外部基线 Benchmark](docs/benchmarks/external-baseline-benchmark.zh-CN.md).
 
 Reproduce:

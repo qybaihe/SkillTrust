@@ -16,6 +16,16 @@ Chinese version: [外部基线 Benchmark](external-baseline-benchmark.zh-CN.md).
 - Published first-pass activation-token reduction on the original 28-package sample: 30699 -> 23867, saving 6832 tokens (22.3%)
 - Optimized preview pack rescan: only 250 residual tokens left to save (1.5%), which indicates the preview pack is already compact
 
+## Figures
+
+![External baseline capability heatmap](../assets/external-baseline-capability-heatmap.svg)
+
+![External baseline governance scorecard](../assets/external-baseline-scorecard.svg)
+
+![Fixture decision matrix](../assets/external-baseline-fixture-matrix.svg)
+
+![Activation token reduction evidence](../assets/external-baseline-token-reduction.svg)
+
 ## Fixture Decision Benchmark
 
 | Fixture | Scenario | Expected | SkillTrust | Score | Risk | Findings | Token Saved |
@@ -110,6 +120,7 @@ This regenerates:
 - `docs/benchmarks/external-baseline-results.json`
 - `docs/benchmarks/external-baseline-benchmark.md`
 - `docs/benchmarks/external-baseline-benchmark.zh-CN.md`
+- `docs/assets/external-baseline-*.svg`
 
 ## Caveats
 

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="786" viewBox="0 0 1120 786" role="img">
+
+<style>
+  .title { font: 700 27px Georgia, serif; fill: #17212b; }
+  .subtitle { font: 500 14px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .axis { font: 650 11px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #24313d; }
+  .axis-small { font: 600 10px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .label { font: 650 13px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .small { font: 500 12px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #52606d; }
+  .tiny { font: 600 10px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #5e6b76; }
+  .num { font: 800 28px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; fill: #17212b; }
+  .inv { fill: #ffffff; }
+  .paper { fill: #fbf7ef; }
+  .panel { fill: #fffdf8; stroke: #263238; stroke-width: 1.2; rx: 12; }
+  .grid { stroke: #d8dee6; stroke-width: 1; }
+  .tick { stroke: #b8c2cc; stroke-width: 1; }
+  .bar-bg { fill: #edf2f7; }
+</style>
+<rect width="100%" height="100%" class="paper"/>
+<text x="38" y="50" class="title">Figure 2. Governance Scorecard Across Baselines</text>
+<text x="38" y="78" class="subtitle">Score = count of directly covered AI Skill governance dimensions out of 15. Specialist scanners remain complementary outside this scope.</text>
+<rect x="26" y="104" width="1068" height="650" class="panel"/>
+<text x="44" y="128" class="axis">Tool</text>
+<text x="286" y="128" class="axis">coverage score</text>
+<text x="838" y="128" class="axis">positioning</text>
+<line x1="286.0" y1="142" x2="286.0" y2="734" class="tick" opacity="0.55"/>
+<text x="286.0" y="756" class="tiny" text-anchor="middle">0</text>
+<line x1="459.3333333333333" y1="142" x2="459.3333333333333" y2="734" class="tick" opacity="0.55"/>
+<text x="459.3333333333333" y="756" class="tiny" text-anchor="middle">5</text>
+<line x1="632.6666666666666" y1="142" x2="632.6666666666666" y2="734" class="tick" opacity="0.55"/>
+<text x="632.6666666666666" y="756" class="tiny" text-anchor="middle">10</text>
+<line x1="806.0" y1="142" x2="806.0" y2="734" class="tick" opacity="0.55"/>
+<text x="806.0" y="756" class="tiny" text-anchor="middle">15</text>
+<text x="44" y="153" class="label">SkillTrust</text>
+<rect x="286" y="138" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="138" width="520.0" height="18" fill="#0ca678" rx="9"/>
+<text x="824" y="153" class="axis">15/15</text>
+<text x="838" y="147" class="tiny">purpose- built for install- time AI Skill intent and</text>
+<text x="838" y="159" class="tiny">permission governance</text>
+<text x="44" y="187" class="label">SkillGuard</text>
+<rect x="286" y="172" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="172" width="242.66666666666666" height="18" fill="#4c6ef5" rx="9"/>
+<text x="824" y="187" class="axis">7/15</text>
+<text x="838" y="181" class="tiny">closest conceptual baseline for AI Skill risk review</text>
+<text x="838" y="193" class="tiny">when available</text>
+<text x="44" y="221" class="label">Scandar</text>
+<rect x="286" y="206" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="206" width="242.66666666666666" height="18" fill="#4c6ef5" rx="9"/>
+<text x="824" y="221" class="axis">7/15</text>
+<text x="838" y="215" class="tiny">specialized scanner- style baseline for AI agent</text>
+<text x="838" y="227" class="tiny">instructions and tools</text>
+<text x="44" y="255" class="label">Socket.dev</text>
+<rect x="286" y="240" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="240" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="255" class="axis">2/15</text>
+<text x="838" y="249" class="tiny">excellent package / dependency risk scanner; not an AI</text>
+<text x="838" y="261" class="tiny">Skill intent- governance layer</text>
+<text x="44" y="289" class="label">Semgrep</text>
+<rect x="286" y="274" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="274" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="289" class="axis">2/15</text>
+<text x="838" y="283" class="tiny">strong source- code pattern and SAST baseline; does</text>
+<text x="838" y="295" class="tiny">not infer AI Skill declared intent</text>
+<text x="44" y="323" class="label">CodeQL</text>
+<rect x="286" y="308" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="308" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="323" class="axis">2/15</text>
+<text x="838" y="317" class="tiny">deep semantic source- code analysis baseline; not an</text>
+<text x="838" y="329" class="tiny">install- time Skill permission model</text>
+<text x="44" y="357" class="label">Gitleaks</text>
+<rect x="286" y="342" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="342" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="357" class="axis">2/15</text>
+<text x="838" y="351" class="tiny">secret detection baseline; catches leaked credentials,</text>
+<text x="838" y="363" class="tiny">not permission overreach</text>
+<text x="44" y="391" class="label">TruffleHog</text>
+<rect x="286" y="376" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="376" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="391" class="axis">2/15</text>
+<text x="838" y="385" class="tiny">secret detection baseline; useful for repository</text>
+<text x="838" y="397" class="tiny">history and verified credential checks</text>
+<text x="44" y="425" class="label">Trivy</text>
+<rect x="286" y="410" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="410" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="425" class="axis">2/15</text>
+<text x="838" y="419" class="tiny">broad CVE, IaC, container, and secret scanning</text>
+<text x="838" y="431" class="tiny">baseline</text>
+<text x="44" y="459" class="label">promptfoo</text>
+<rect x="286" y="444" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="444" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="459" class="axis">2/15</text>
+<text x="838" y="453" class="tiny">LLM app evaluation and red- team baseline; tests model</text>
+<text x="838" y="465" class="tiny">behavior, not install- time Skill permissions</text>
+<text x="44" y="493" class="label">garak</text>
+<rect x="286" y="478" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="478" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="493" class="axis">2/15</text>
+<text x="838" y="487" class="tiny">LLM vulnerability scanner; targets deployed model /</text>
+<text x="838" y="499" class="tiny">app behavior rather than Skill package governance</text>
+<text x="44" y="527" class="label">Lakera Guard</text>
+<rect x="286" y="512" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="512" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="527" class="axis">2/15</text>
+<text x="838" y="521" class="tiny">runtime prompt- injection and content- risk guardrail;</text>
+<text x="838" y="533" class="tiny">not a package optimizer</text>
+<text x="44" y="561" class="label">NeMo Guardrails</text>
+<rect x="286" y="546" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="546" width="69.33333333333333" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="561" class="axis">2/15</text>
+<text x="838" y="555" class="tiny">runtime conversational guardrails framework; not an AI</text>
+<text x="838" y="567" class="tiny">Skill permission analyzer</text>
+<text x="44" y="595" class="label">OSV-Scanner</text>
+<rect x="286" y="580" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="580" width="34.666666666666664" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="595" class="axis">1/15</text>
+<text x="838" y="589" class="tiny">known- vulnerability baseline for lockfiles / SBOMs;</text>
+<text x="838" y="601" class="tiny">not an AI Skill intent scanner</text>
+<text x="44" y="629" class="label">Grype</text>
+<rect x="286" y="614" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="614" width="34.666666666666664" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="629" class="axis">1/15</text>
+<text x="838" y="623" class="tiny">SBOM / package vulnerability scanning baseline</text>
+<text x="44" y="663" class="label">OpenSSF Package Analysis</text>
+<rect x="286" y="648" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="648" width="34.666666666666664" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="663" class="axis">1/15</text>
+<text x="838" y="657" class="tiny">dynamic package install behavior baseline; useful for</text>
+<text x="838" y="669" class="tiny">dependency ecosystem risk</text>
+<text x="44" y="697" class="label">OpenSSF Scorecard</text>
+<rect x="286" y="682" width="520" height="18" class="bar-bg" rx="9"/>
+<rect x="286" y="682" width="0.0" height="18" fill="#adb5bd" rx="9"/>
+<text x="824" y="697" class="axis">0/15</text>
+<text x="838" y="691" class="tiny">repository health and supply- chain best- practice</text>
+<text x="838" y="703" class="tiny">baseline</text>
+</svg>

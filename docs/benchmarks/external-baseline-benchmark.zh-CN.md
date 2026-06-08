@@ -16,6 +16,16 @@
 - 原始 28 包公开样本第一轮 activation-token reduction：30699 -> 23867，节省 6832 tokens（22.3%）
 - 优化预览包复扫：只剩 250 个可继续节省的 residual tokens（1.5%），说明 preview pack 已经明显变精简
 
+## 图表
+
+![外部基线能力热力图](../assets/external-baseline-capability-heatmap.svg)
+
+![外部基线治理评分表](../assets/external-baseline-scorecard.svg)
+
+![Fixture 决策矩阵](../assets/external-baseline-fixture-matrix.svg)
+
+![Activation token reduction evidence](../assets/external-baseline-token-reduction.svg)
+
 ## Fixture 决策 Benchmark
 
 | Fixture | 场景 | 预期 | SkillTrust | 分数 | 风险等级 | Findings | Token 节省 |
@@ -110,6 +120,7 @@ PYTHONDONTWRITEBYTECODE=1 python scripts/external_baseline_benchmark.py
 - `docs/benchmarks/external-baseline-results.json`
 - `docs/benchmarks/external-baseline-benchmark.md`
 - `docs/benchmarks/external-baseline-benchmark.zh-CN.md`
+- `docs/assets/external-baseline-*.svg`
 
 ## 限制说明
 
