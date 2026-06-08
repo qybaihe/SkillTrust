@@ -67,6 +67,26 @@ SkillTrust 已对 28 个来自热门公开 AI Skill、Claude Skill、Cursor rule
 
 完整被评测样本清单、来源链接、下载链接和 GitHub Stars：[被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md)。英文版：[Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md)。
 
+## 外部基线 Benchmark
+
+SkillTrust 也和 17 个主流安全、供应链、LLM guardrail / eval baseline 做了对比，包括 SkillGuard、Scandar、Socket.dev、Semgrep、CodeQL、Gitleaks、TruffleHog、OSV-Scanner、Trivy、Grype、OpenSSF Scorecard、promptfoo、garak、Lakera Guard 和 NeMo Guardrails。
+
+这份对比刻意采用“互补”而不是“谁完全替代谁”的表述：
+
+- SAST、CVE、secret scanning、package behavior analysis、LLM red-team 工具在各自原生任务上仍然很有价值。
+- SkillTrust 补上的是 AI Skill 安装前治理层：声明意图、最小权限推断、实际/请求权限越界、与 Agent 语义审查保守融合、policy 产物、修复计划、优化预览包和 token-efficiency planning。
+- 在三个本地 fixtures 上，SkillTrust 稳定复现预期决策：benign -> `allow`，overprivileged -> `warn`，malicious-like -> `block`。
+- 在原始 28 包公开样本上，SkillTrust 第一轮优化计划预计将 activation-body tokens 从 30,699 降到 23,867，节省 6,832 tokens，约 22.3%。
+- 对 28 个优化版 preview packages 再扫描后，只剩 250 个 residual tokens 可继续节省，约 1.5%，可作为优化包已经变精简的回归检查。
+
+查看报告：[外部基线 Benchmark](docs/benchmarks/external-baseline-benchmark.zh-CN.md)。英文版：[External Baseline Benchmark](docs/benchmarks/external-baseline-benchmark.md)。
+
+复现命令：
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/external_baseline_benchmark.py
+```
+
 ## 优化版 Skill 包
 
 SkillTrust 现在也包含一个公开的 [optimized-skills](optimized-skills/) preview pack。这里有 28 个基于 benchmark 样本生成的优化版 Skill packages，每个都包含精简 `SKILL.md`、最小权限 manifest、runtime policy overlay 和 optimization summary。

@@ -67,6 +67,26 @@ See [Popular AI Skill Ecosystem Benchmark](docs/benchmarks/popular-skills-benchm
 
 Full evaluated sample catalog with source links, download links, and GitHub star counts: [Evaluated Skills Catalog](docs/benchmarks/evaluated-skills-catalog.md). Chinese version: [被评测 Skill 清单](docs/benchmarks/evaluated-skills-catalog.zh-CN.md).
 
+## External Baseline Benchmark
+
+SkillTrust is also benchmarked against 17 well-known security, supply-chain, and LLM guardrail/evaluation baselines, including SkillGuard, Scandar, Socket.dev, Semgrep, CodeQL, Gitleaks, TruffleHog, OSV-Scanner, Trivy, Grype, OpenSSF Scorecard, promptfoo, garak, Lakera Guard, and NeMo Guardrails.
+
+The result is intentionally framed as complementary rather than winner-takes-all:
+
+- SAST, CVE, secret scanning, package behavior analysis, and LLM red-team tools remain valuable for their native tasks.
+- SkillTrust covers the install-time AI Skill governance layer: declared intent, least-privilege permission inference, observed/requested permission overreach, conservative Agent semantic fusion, policy artifacts, remediation plans, optimized preview packages, and token-efficiency planning.
+- On the three local fixtures, SkillTrust reproduces the expected decisions: benign -> `allow`, overprivileged -> `warn`, malicious-like -> `block`.
+- On the original 28-package public sample, SkillTrust's first-pass optimization plan estimates 30,699 -> 23,867 activation-body tokens, saving 6,832 tokens, about 22.3%.
+- Re-scanning the 28 optimized preview packages leaves only 250 residual tokens to save, about 1.5%, which acts as a compactness regression check.
+
+See [External Baseline Benchmark](docs/benchmarks/external-baseline-benchmark.md). Chinese version: [外部基线 Benchmark](docs/benchmarks/external-baseline-benchmark.zh-CN.md).
+
+Reproduce:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/external_baseline_benchmark.py
+```
+
 ## Optimized Skill Pack
 
 SkillTrust also includes a public [optimized-skills](optimized-skills/) preview pack. It contains 28 generated Skill packages based on the benchmark sample, each with a compact `SKILL.md`, least-privilege permission manifest, runtime policy overlay, and optimization summary.
