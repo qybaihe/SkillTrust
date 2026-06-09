@@ -8,6 +8,8 @@
 
 SkillTrust 可以把一个不可信的 AI Skill 包转换成：意图绑定、最小权限、可审计的治理包。
 
+它的完整产品目标不只是扫描，而是：**上传一个 Skill，输出一个优化后的 preview Skill**。优化后的 Skill 要能减少激活时消耗的 token，把确定性的流程尽量变成代码 / schema / config 来提高执行效率，通过更清晰的触发条件和边界提高 Agent 选择准确率，同时保留最小权限治理和审计证据。
+
 它不是只问：
 
 > 这个 Skill 危不危险？
@@ -31,6 +33,23 @@ SkillTrust 结合两层判断：
 - likely false positive 可以被标注，但证据仍然保留
 - critical sensitive-data-to-network flow 不能被语义审查洗成安全
 - 最终安装决策始终是 `allow`、`warn` 或 `block`
+
+## Skill 优化目标
+
+SkillTrust 把 `allow` 视为起点，而不是终点。一个 Skill 完成审计后，SkillTrust 可以继续生成统一优化计划和 preview package 蓝图：
+
+- **节约 token**：压缩激活时必须读取的 `SKILL.md`，把长示例和背景材料延迟到 references，把确定性说明迁移成 scripts、schemas 或 config。
+- **提高执行效率**：用 helper code、校验器、路由配置和机器可检查的输出契约，替代反复让模型读长流程、做重复判断。
+- **提高选择准确率**：优化 name、description、触发边界和 reference navigation，让宿主 Agent 更容易在多个 Skill 中选对。
+- **保留权限治理**：deterministic findings 不隐藏，最小权限 manifest 和 runtime policy gate 会随优化包一起保留。
+
+单独运行优化器：
+
+```bash
+python -m skilltrust optimize fixtures/overprivileged-research-skill --out reports/optimized-skill-demo
+```
+
+它会输出 `skill_optimization_plan.json`、`skill_optimization_report.md`、`optimized_SKILL.md` 和 `skill_design_guidelines.md`。其中 guidelines 收集了高质量 Skill 开发规则，方便 Agent / AI 辅助生成优化版 Skill。详见 [Skill 优化指南](references/08-skill-optimization-guidelines.md)。
 
 ## SkillTrust 是做什么的
 
@@ -230,6 +249,12 @@ SkillTrust **不调用 OpenAI、Anthropic 或任何外部模型 API**，也**不
 请使用 SkillTrust 审查这个 Skill 生态的编写质量、token 效率和 taxonomy 清晰度。除非我明确批准修改，否则所有结果只生成建议或审批计划。
 ```
 
+### 生成优化版 Skill 预览包
+
+```text
+请使用 SkillTrust 把这个 Skill package 优化成 preview Skill。请保留 deterministic findings，减少激活 token，把确定性流程迁移成 scripts 或 schemas，提高触发准确率，并把生成的最小权限 policy 一起放进优化包。
+```
+
 ## 输出
 
 SkillTrust 可以生成：
@@ -245,6 +270,9 @@ SkillTrust 可以生成：
 - `authoring_report.md`：Skill harness 和 references 拆分建议
 - `token_efficiency_report.md`：token 浪费和 scriptification 优化机会
 - `skill_taxonomy_report.md`：命名、description 和路由歧义 findings
+- `skill_optimization_plan.json`：统一的 token、执行效率、选择准确率和权限治理优化计划
+- `skill_optimization_report.md`：面向人的优化版 Skill 预览报告
+- `skill_design_guidelines.md`：给 Agent 读取的 Skill 优化规则
 
 ## Trust Fit Score
 

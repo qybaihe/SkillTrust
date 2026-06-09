@@ -10,6 +10,7 @@ from .authoring import analyze_authoring, write_authoring_outputs
 from .governance import govern_skills, install_decision, remediate_skill
 from .reporting import summary_text, write_outputs
 from .semantic import draft_semantic_review, fuse_analysis, write_review_request
+from .skill_optimizer import analyze_skill_optimization, write_skill_optimization_outputs
 from .taxonomy import analyze_taxonomy, write_taxonomy_outputs
 from .token_optimizer import analyze_token_efficiency, write_token_outputs
 
@@ -87,6 +88,15 @@ def build_parser() -> argparse.ArgumentParser:
     token_optimize.add_argument("path", help="Path to a Skill package directory or SKILL.md file.")
     token_optimize.add_argument("--out", help="Output directory for token efficiency report and optimization plan.")
     token_optimize.add_argument("--format", choices=["text", "json"], default="text", help="Output format printed to stdout.")
+
+    optimize = subparsers.add_parser(
+        "optimize",
+        help="Create a unified Skill optimization plan for token savings, execution efficiency, and selection accuracy.",
+    )
+    optimize.add_argument("path", help="Path to a Skill package directory or SKILL.md file.")
+    optimize.add_argument("--out", help="Output directory for unified optimization artifacts.")
+    optimize.add_argument("--threshold", type=int, default=70, help="Minimum score for install allow decision.")
+    optimize.add_argument("--format", choices=["text", "json"], default="text", help="Output format printed to stdout.")
 
     taxonomy_audit = subparsers.add_parser("taxonomy-audit", help="Find naming and trigger ambiguity across a Skill set.")
     taxonomy_audit.add_argument(
@@ -290,6 +300,31 @@ def main(argv: list[str] | None = None) -> None:
             )
             if args.out:
                 print(f"Token artifacts written to: {Path(args.out).resolve()}")
+        return
+
+    if args.command == "optimize":
+        try:
+            plan = analyze_skill_optimization(args.path, threshold=args.threshold)
+        except Exception as exc:  # pragma: no cover - CLI guard
+            print(f"skilltrust: {exc}", file=sys.stderr)
+            raise SystemExit(2)
+        if args.out:
+            write_skill_optimization_outputs(args.out, plan)
+        if args.format == "json":
+            print(json.dumps(plan, indent=2, ensure_ascii=False))
+        else:
+            token_metrics = plan["token_efficiency_analysis"]["metrics"]
+            print(
+                f"Skill optimization: {plan['optimization_score']}/100 "
+                f"(projected {plan['projected_optimization_score']}/100)"
+            )
+            print(
+                f"Estimated activation tokens saved: {token_metrics['estimated_tokens_saved']}; "
+                f"actions: {len(plan['optimization_actions'])}; "
+                f"install gate: {plan['current_install_decision']['action']}"
+            )
+            if args.out:
+                print(f"Optimization artifacts written to: {Path(args.out).resolve()}")
         return
 
     if args.command == "taxonomy-audit":

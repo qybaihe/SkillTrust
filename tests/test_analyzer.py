@@ -8,6 +8,7 @@ from skilltrust.authoring import analyze_authoring, write_authoring_outputs
 from skilltrust.governance import govern_skills, install_decision, remediate_skill
 from skilltrust.reporting import write_outputs
 from skilltrust.semantic import draft_semantic_review, fuse_analysis, write_review_request
+from skilltrust.skill_optimizer import analyze_skill_optimization, write_skill_optimization_outputs
 from skilltrust.taxonomy import analyze_taxonomy, write_taxonomy_outputs
 from skilltrust.token_optimizer import analyze_token_efficiency, write_token_outputs
 
@@ -168,6 +169,30 @@ def test_token_optimizer_generates_scriptification_plan(tmp_path: Path) -> None:
     assert analysis["optimization_principles"]
     assert (tmp_path / "token_efficiency_report.md").exists()
     assert (tmp_path / "token_optimization_plan.json").exists()
+
+
+def test_unified_skill_optimizer_generates_multidimensional_plan(tmp_path: Path) -> None:
+    plan = analyze_skill_optimization(FIXTURES / "overprivileged-research-skill")
+    write_skill_optimization_outputs(tmp_path, plan)
+
+    assert plan["schema_version"] == "skilltrust.skill_optimization.v1"
+    assert "optimized preview Skill" in plan["product_goal"]
+    assert set(plan["dimensions"]) >= {
+        "token_efficiency",
+        "execution_efficiency",
+        "selection_accuracy",
+        "permission_governance",
+    }
+    assert plan["dimensions"]["token_efficiency"]["evidence"]["activation_body_tokens_estimate"] > 0
+    assert plan["dimensions"]["execution_efficiency"]["guides"]
+    assert plan["dimensions"]["selection_accuracy"]["guides"]
+    assert plan["skill_design_guides"]
+    assert plan["optimization_actions"]
+    assert plan["optimized_skill_package_blueprint"]["package_name"] == "optimized-skill.zip"
+    assert (tmp_path / "skill_optimization_plan.json").exists()
+    assert (tmp_path / "skill_optimization_report.md").exists()
+    assert (tmp_path / "optimized_SKILL.md").exists()
+    assert (tmp_path / "skill_design_guidelines.md").exists()
 
 
 def test_taxonomy_audit_generates_approval_plan(tmp_path: Path) -> None:

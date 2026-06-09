@@ -8,6 +8,8 @@
 
 SkillTrust turns an untrusted AI Skill package into an intent-bound, least-privilege, auditable governance bundle.
 
+Its full product objective is broader than scanning: **upload one Skill, receive an optimized preview Skill**. The optimized Skill should reduce activation tokens, improve execution efficiency by moving deterministic work into code/schema/config, improve Agent selection accuracy through clearer triggers and boundaries, and preserve least-privilege permission governance.
+
 It is not just a scanner asking:
 
 > Is this Skill dangerous?
@@ -31,6 +33,23 @@ The final result is conservative:
 - likely false positives can be marked, but evidence remains visible
 - critical sensitive-data-to-network flow cannot be upgraded to safe
 - the final install decision is always `allow`, `warn`, or `block`
+
+## Skill Optimization Objective
+
+SkillTrust treats `allow` as the starting line, not the finish line. After a Skill is audited, SkillTrust can produce a unified optimization plan and preview package blueprint:
+
+- **Token savings**: shrink activation-time `SKILL.md` content, defer references, and convert long deterministic instructions into scripts, schemas, or config.
+- **Execution efficiency**: replace repeated model reasoning with helper code, validators, routing config, and machine-checkable output contracts.
+- **Selection accuracy**: improve names, descriptions, trigger boundaries, and reference navigation so the host Agent chooses the right Skill more reliably.
+- **Permission governance**: keep deterministic findings visible, preserve least-privilege manifests, and ship runtime policy gates with the optimized preview.
+
+Run the standalone optimizer:
+
+```bash
+python -m skilltrust optimize fixtures/overprivileged-research-skill --out reports/optimized-skill-demo
+```
+
+This writes `skill_optimization_plan.json`, `skill_optimization_report.md`, `optimized_SKILL.md`, and `skill_design_guidelines.md`. The guidelines collect high-quality Skill design rules for Agent-assisted optimization. See [Skill Optimization Guidelines](references/08-skill-optimization-guidelines.md).
 
 ## What SkillTrust Does
 
@@ -230,6 +249,12 @@ SkillTrust does **not** call OpenAI, Anthropic, or any external model API. No AP
 Use SkillTrust to review this Skill ecosystem for authoring quality, token efficiency, and taxonomy clarity. Keep all changes as recommendations or approval plans unless I explicitly approve edits.
 ```
 
+### Generate An Optimized Skill Preview
+
+```text
+Use SkillTrust to optimize this Skill package into a preview Skill. Preserve deterministic findings, reduce activation tokens, move deterministic procedures into scripts or schemas, improve trigger accuracy, and keep the generated permission policy in the package.
+```
+
 ## Outputs
 
 SkillTrust can generate:
@@ -245,6 +270,9 @@ SkillTrust can generate:
 - `authoring_report.md`: Skill harness and reference-splitting recommendations
 - `token_efficiency_report.md`: token waste and scriptification opportunities
 - `skill_taxonomy_report.md`: naming, description, and routing ambiguity findings
+- `skill_optimization_plan.json`: unified token, execution, selection, and permission optimization plan
+- `skill_optimization_report.md`: human-readable optimized Skill preview plan
+- `skill_design_guidelines.md`: Agent-readable rules for optimizing Skill authoring quality
 
 ## Trust Fit Score
 
